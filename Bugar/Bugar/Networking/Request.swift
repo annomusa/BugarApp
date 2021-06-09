@@ -36,6 +36,10 @@ struct Request<Model> {
         
         self.request = URLRequest(url: requestURL)
         self.parser = parser
+        self.request.setValue(acceptableContentType.rawValue, forHTTPHeaderField: "Accept")
+        self.request.setValue(requestContentType.rawValue, forHTTPHeaderField: "Content-Type")
+        self.request.httpMethod = method.rawValue
+        
     }
 }
 
@@ -49,6 +53,7 @@ extension Request where Model: Decodable {
             return Result {
                 if let data = data {
                     let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .iso8601
                     return try decoder.decode(Model.self, from: data)
                 } else {
                     throw NodataError()

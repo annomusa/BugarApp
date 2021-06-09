@@ -7,4 +7,23 @@
 
 import Foundation
 
-let flickrKey = "001c7cb447cf3e8803b1d0e926755394"
+struct Constants {
+    struct UnsplashBase {
+        static let baseHost: String = "https://api.unsplash.com/"
+        static let unsplashKey = "8nJxQMr4Jq_JjoObjfpAsKeSjQcPudLBzCM3wD-_fsE"
+    }
+    
+    struct UnsplashURLs {
+        static let hostURL: URL = URL(string: Constants.UnsplashBase.baseHost)!
+        
+        /// https://unsplash.com/documentation#search-photos
+        static let searchEndpoint = hostURL.appendingPathComponent("search/photos")
+    }
+    
+    struct UnsplashQuery {
+        static let query: String = "query"
+        static let geo: String = "geo"
+        static let consumerKey: String = "client_id"
+        static let page: String = "page"
+    }
+}

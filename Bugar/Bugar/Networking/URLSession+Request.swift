@@ -9,6 +9,7 @@ import Foundation
 
 extension URLSession {
     
+    @discardableResult
     func call<Model>(
         request: Request<Model>,
         onComplete: @escaping (Result<Model, Error>) -> ()
