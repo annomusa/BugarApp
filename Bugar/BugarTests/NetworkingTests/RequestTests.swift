@@ -24,7 +24,3 @@ final class RequestTests: XCTestCase {
         XCTAssertEqual(expectedURL, sut.request.url)
     }
 }
-
-struct ModelDecodable: Decodable {
-    var attribute1: String
-}
