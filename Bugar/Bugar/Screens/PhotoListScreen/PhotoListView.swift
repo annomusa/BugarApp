@@ -37,6 +37,7 @@ final class PhotoListView: UIView {
         
         addSubview(collectionView)
         collectionView.frame = frame
+        collectionView.alwaysBounceVertical = true
         collectionView.backgroundColor = .white
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: photoCellID)
         collectionView.reloadData()
@@ -44,20 +45,33 @@ final class PhotoListView: UIView {
         collectionView.dataSource = self
     }
     
+    func invalidateLayout(frame: CGRect) {
+        self.frame = frame
+        collectionView.frame = frame
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    func render() {
+        let work = {
+            self.collectionView.reloadData()
+        }
+        if Thread.isMainThread {
+            work()
+        } else {
+            DispatchQueue.main.async {
+                work()
+            }
+        }
+    }
+    
     func set(photos: [Photo]) {
         self.photos = photos
-        collectionView.reloadData()
+        render()
     }
     
     func append(photos: [Photo]) {
         self.photos.append(contentsOf: photos)
-        if Thread.isMainThread {
-            collectionView.reloadData()
-        } else {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
+        render()
     }
     
     required init?(coder: NSCoder) {
@@ -89,6 +103,10 @@ extension PhotoListView: UICollectionViewDataSource {
 }
 
 extension PhotoListView: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        photoListDelegate?.photoListView(didSelect: photos[indexPath.row])
+    }
     
     func collectionView(
         _ collectionView: UICollectionView,

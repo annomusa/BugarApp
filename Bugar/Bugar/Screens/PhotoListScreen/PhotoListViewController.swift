@@ -26,12 +26,25 @@ final class PhotoListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.photoListView = PhotoListView(frame: view.frame)
         navigationController?.setNavigationBarHidden(true, animated: false)
-        view = photoListView
+        title = "Photo List"
+        
+        let photoListView = PhotoListView(frame: view.frame)
+        view.addSubview(photoListView)
+        self.photoListView = photoListView
+        
         fetchPhotos()
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil) { context in
+            self.photoListView?.invalidateLayout(frame: self.view.frame)
+        }
+    }
+}
+
+private extension PhotoListViewController {
     
     private func fetchPhotos() {
         searchService.search(
