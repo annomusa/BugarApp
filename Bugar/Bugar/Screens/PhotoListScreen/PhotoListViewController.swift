@@ -80,7 +80,7 @@ private extension PhotoListViewController {
     
     private func onSuccessFetch(photos: [Photo]) {
         photoListView?.append(photos: photos)
-//        prefetchLargeImage(photos: photos)
+        prefetchLargeImage(photos: photos)
     }
 }
 

@@ -48,12 +48,14 @@ final class PhotoDetailView: UIView {
         }
         
         imageView.sd_setImage(
-            with: URL(string: photo.urls.small),
+            with: URL(string: photo.urls.full),
             placeholderImage: placeholder,
             progress: { receivedSize, expectedSize, _ in
                 print(receivedSize, expectedSize)
             },
-            completed: nil
+            completed: { image, error, cacheType, imageURL in
+                print(cacheType.rawValue)
+            }
         )
     }
 }
