@@ -11,7 +11,7 @@ import UIKit
 let photoCellID = "photoCellID"
 
 protocol PhotoListViewDelegate: AnyObject {
-    func photoListView(didSelect image: Photo)
+    func photoListView(didSelect photo: Photo)
 }
 
 final class PhotoListView: UIView {
@@ -35,6 +35,9 @@ final class PhotoListView: UIView {
         
         super.init(frame: frame)
         
+        backgroundColor = .systemBackground
+        collectionView.backgroundColor = .systemBackground
+        
         addSubview(collectionView)
         collectionView.frame = frame
         collectionView.alwaysBounceVertical = true
@@ -43,6 +46,10 @@ final class PhotoListView: UIView {
         collectionView.reloadData()
         collectionView.delegate = self
         collectionView.dataSource = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func invalidateLayout(frame: CGRect) {
@@ -74,10 +81,6 @@ final class PhotoListView: UIView {
         render()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
 
 extension PhotoListView: UICollectionViewDelegate {
@@ -96,7 +99,7 @@ extension PhotoListView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoCellID, for: indexPath) as? PhotoCollectionViewCell
             else { return UICollectionViewCell() }
         cell.backgroundColor = .white
-        cell.setImage(url: URL(string: photos[indexPath.row].urls.small))
+        cell.set(photo: photos[indexPath.row])
         return cell
     }
     

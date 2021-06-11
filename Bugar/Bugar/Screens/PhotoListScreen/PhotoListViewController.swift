@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 final class PhotoListViewController: UIViewController {
     
@@ -24,14 +25,17 @@ final class PhotoListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func loadView() {
+        super.loadView()
+        
+        photoListView = PhotoListView(frame: view.frame)
+        photoListView?.photoListDelegate = self
+        view.backgroundColor = .systemBackground
+        view.addSubview(photoListView!)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        title = "Photo List"
-        
-        let photoListView = PhotoListView(frame: view.frame)
-        view.addSubview(photoListView)
-        self.photoListView = photoListView
         
         fetchPhotos()
     }
@@ -65,13 +69,32 @@ private extension PhotoListViewController {
         )
     }
     
+    private func prefetchLargeImage(photos: [Photo]) {
+        SDWebImagePrefetcher.shared.prefetchURLs(
+            photos.compactMap { URL(string: $0.urls.full) },
+            progress: { noOfFinishedUrls, noOfTotalUrls in
+                print(noOfFinishedUrls, noOfTotalUrls)
+            },
+            completed: { noOfFinishedUrls, noOfSkippedUrls in
+                print(noOfFinishedUrls, noOfSkippedUrls)
+            }
+        )
+    }
+    
     private func onSuccessFetch(photos: [Photo]) {
         photoListView?.append(photos: photos)
+//        prefetchLargeImage(photos: photos)
     }
 }
 
 extension PhotoListViewController: PhotoListViewDelegate {
-    func photoListView(didSelect image: Photo) {
-        
+    func photoListView(didSelect photo: Photo) {
+        DispatchQueue.main.async {
+            let vc = PhotoDetailViewController(photo: photo)
+            self.navigationController?.pushViewController(
+                vc,
+                animated: true
+            )
+        }
     }
 }

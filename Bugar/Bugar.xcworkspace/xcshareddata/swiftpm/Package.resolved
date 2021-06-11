@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "BlurHash",
+        "repositoryURL": "https://github.com/patricks/blurhash-swift",
+        "state": {
+          "branch": "master",
+          "revision": "ff61ebc750f1309fc61257b9427247b85df1c559",
+          "version": null
+        }
+      },
+      {
         "package": "SDWebImage",
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage",
         "state": {

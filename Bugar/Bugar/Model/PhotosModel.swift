@@ -21,6 +21,7 @@ struct SearchPhotosResult: Codable {
 struct Photo: Codable {
     let id: String
     let createdAt, updatedAt: Date?
+    let width, height: Int
     let blurHash: String?
     let urls: Urls
     let likes: Int
@@ -30,6 +31,7 @@ struct Photo: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case blurHash = "blur_hash"
+        case width, height
         case urls, likes
     }
 }

@@ -10,6 +10,10 @@
 		12FD0EDD1334C724AD3F4D71 /* Pods_Bugar_BugarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D9CEA2B5D61254BD3AB324 /* Pods_Bugar_BugarUITests.framework */; };
 		3E7EA5C6860143E3DCEB828C /* Pods_BugarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7CDF89ED260990E1E42CBF /* Pods_BugarTests.framework */; };
 		B10A965526731E3F00CE900D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B10A965426731E3F00CE900D /* SDWebImage */; };
+		B10A9658267341EE00CE900D /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10A9657267341EE00CE900D /* PhotoDetailViewController.swift */; };
+		B10A965C26734D8D00CE900D /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10A965B26734D8C00CE900D /* PhotoDetailView.swift */; };
+		B10A96612673524A00CE900D /* UIView+CBFrameHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B10A96602673524A00CE900D /* UIView+CBFrameHelpers.m */; };
+		B10A9664267356C500CE900D /* BlurHash in Frameworks */ = {isa = PBXBuildFile; productRef = B10A9663267356C500CE900D /* BlurHash */; };
 		B10BE317266A3BED0057372B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10BE316266A3BED0057372B /* AppDelegate.swift */; };
 		B10BE319266A3BED0057372B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10BE318266A3BED0057372B /* SceneDelegate.swift */; };
 		B10BE320266A3BEE0057372B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10BE31F266A3BEE0057372B /* Assets.xcassets */; };
@@ -61,6 +65,11 @@
 		80D9CEA2B5D61254BD3AB324 /* Pods_Bugar_BugarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bugar_BugarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80E5B5906F3342A01F299870 /* Pods-Bugar-BugarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bugar-BugarUITests.debug.xcconfig"; path = "Target Support Files/Pods-Bugar-BugarUITests/Pods-Bugar-BugarUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AEC897622090B3D3135F465A /* Pods-BugarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BugarTests.debug.xcconfig"; path = "Target Support Files/Pods-BugarTests/Pods-BugarTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B10A9657267341EE00CE900D /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
+		B10A965B26734D8C00CE900D /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
+		B10A965E2673521000CE900D /* UIView+CBFrameHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+CBFrameHelpers.h"; sourceTree = "<group>"; };
+		B10A965F2673524A00CE900D /* Bugar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bugar-Bridging-Header.h"; sourceTree = "<group>"; };
+		B10A96602673524A00CE900D /* UIView+CBFrameHelpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+CBFrameHelpers.m"; sourceTree = "<group>"; };
 		B10BE313266A3BED0057372B /* Bugar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bugar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B10BE316266A3BED0057372B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B10BE318266A3BED0057372B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B10A9664267356C500CE900D /* BlurHash in Frameworks */,
 				B10A965526731E3F00CE900D /* SDWebImage in Frameworks */,
 				BB99D5263A7F66EAA70685BE /* Pods_Bugar.framework in Frameworks */,
 			);
@@ -144,6 +154,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B10A9656267341DC00CE900D /* PhotoDetailScreen */ = {
+			isa = PBXGroup;
+			children = (
+				B10A965B26734D8C00CE900D /* PhotoDetailView.swift */,
+				B10A9657267341EE00CE900D /* PhotoDetailViewController.swift */,
+			);
+			path = PhotoDetailScreen;
+			sourceTree = "<group>";
+		};
+		B10A965D267351BD00CE900D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B10A965F2673524A00CE900D /* Bugar-Bridging-Header.h */,
+				B10A965E2673521000CE900D /* UIView+CBFrameHelpers.h */,
+				B10A96602673524A00CE900D /* UIView+CBFrameHelpers.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		B10BE30A266A3BED0057372B = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +203,7 @@
 				B10BE346266A4EE10057372B /* Constant.swift */,
 				B10BE318266A3BED0057372B /* SceneDelegate.swift */,
 				B10BE31F266A3BEE0057372B /* Assets.xcassets */,
+				B10A965D267351BD00CE900D /* Extensions */,
 				B10BE321266A3BEE0057372B /* LaunchScreen.storyboard */,
 				B1BCB8A0267126D5004EA191 /* Model */,
 				B1BCB88C267111C0004EA191 /* Networking */,
@@ -187,11 +217,11 @@
 		B10BE32C266A3BEE0057372B /* BugarTests */ = {
 			isa = PBXGroup;
 			children = (
-				B1DF56322673151B0034C073 /* Mock */,
-				B1DF562F267314BD0034C073 /* ScreenTests */,
 				B10BE32F266A3BEE0057372B /* Info.plist */,
+				B1DF56322673151B0034C073 /* Mock */,
 				B1BCB89D267122AE004EA191 /* Model */,
 				B1BCB88F2671159B004EA191 /* NetworkingTests */,
+				B1DF562F267314BD0034C073 /* ScreenTests */,
 				B1BCB89C26711FE7004EA191 /* Stub */,
 			);
 			path = BugarTests;
@@ -217,6 +247,7 @@
 		B192F1F5266DEEEB001E53CA /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				B10A9656267341DC00CE900D /* PhotoDetailScreen */,
 				B1DF5622267213300034C073 /* PhotoListScreen */,
 				B192F1F4266DEECD001E53CA /* MainScreen */,
 			);
@@ -327,6 +358,7 @@
 			name = Bugar;
 			packageProductDependencies = (
 				B10A965426731E3F00CE900D /* SDWebImage */,
+				B10A9663267356C500CE900D /* BlurHash */,
 			);
 			productName = Bugar;
 			productReference = B10BE313266A3BED0057372B /* Bugar.app */;
@@ -381,6 +413,7 @@
 				TargetAttributes = {
 					B10BE312266A3BED0057372B = {
 						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1250;
 					};
 					B10BE328266A3BEE0057372B = {
 						CreatedOnToolsVersion = 12.5;
@@ -403,6 +436,7 @@
 			mainGroup = B10BE30A266A3BED0057372B;
 			packageReferences = (
 				B10A965326731E3F00CE900D /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				B10A9662267356C500CE900D /* XCRemoteSwiftPackageReference "blurhash-swift" */,
 			);
 			productRefGroup = B10BE314266A3BED0057372B /* Products */;
 			projectDirPath = "";
@@ -520,8 +554,11 @@
 				B1BCB88E267111DB004EA191 /* ContentType.swift in Sources */,
 				B10BE317266A3BED0057372B /* AppDelegate.swift in Sources */,
 				B1DF562A26725E6C0034C073 /* SearchPhotosService.swift in Sources */,
+				B10A9658267341EE00CE900D /* PhotoDetailViewController.swift in Sources */,
 				B1BCB8A226712708004EA191 /* PhotosModel.swift in Sources */,
 				B10BE319266A3BED0057372B /* SceneDelegate.swift in Sources */,
+				B10A965C26734D8D00CE900D /* PhotoDetailView.swift in Sources */,
+				B10A96612673524A00CE900D /* UIView+CBFrameHelpers.m in Sources */,
 				B1BCB891267117EB004EA191 /* NetworkError.swift in Sources */,
 				B1BCB89326711836004EA191 /* Request.swift in Sources */,
 				B10BE347266A4EE10057372B /* Constant.swift in Sources */,
@@ -701,6 +738,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Bugar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -710,6 +748,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.progrsv.BugarInspiration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bugar/Extensions/Bugar-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -721,6 +761,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Bugar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -730,6 +771,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.progrsv.BugarInspiration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bugar/Extensions/Bugar-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -869,6 +911,14 @@
 				minimumVersion = 5.11.1;
 			};
 		};
+		B10A9662267356C500CE900D /* XCRemoteSwiftPackageReference "blurhash-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/patricks/blurhash-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -876,6 +926,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B10A965326731E3F00CE900D /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		B10A9663267356C500CE900D /* BlurHash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B10A9662267356C500CE900D /* XCRemoteSwiftPackageReference "blurhash-swift" */;
+			productName = BlurHash;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

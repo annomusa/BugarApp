@@ -19,13 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
+        window.backgroundColor = .systemBackground
         let vc = MainTabViewController()
-        
-        let navigation = UINavigationController(rootViewController: vc)
-        window.rootViewController = navigation
+        window.rootViewController = vc
         
         self.window = window
-        window.makeKeyAndVisible()
+        self.window?.makeKeyAndVisible()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
