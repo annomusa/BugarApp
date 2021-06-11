@@ -15,6 +15,8 @@ final class PhotoListViewController: UIViewController {
     private var photoListView: PhotoListView?
     var searchPhotoResult: Result<SearchPhotosResult, Error>?
     
+    var customNavigationControllerDelegate = CustomNavigationControllerDelegate()
+    
     init(searchService: PhotosSearcher) {
         self.searchService = searchService
         
@@ -30,6 +32,7 @@ final class PhotoListViewController: UIViewController {
         
         photoListView = PhotoListView(frame: view.frame)
         photoListView?.photoListDelegate = self
+        navigationController?.delegate = customNavigationControllerDelegate
         view.backgroundColor = .systemBackground
         view.addSubview(photoListView!)
     }
@@ -85,8 +88,9 @@ private extension PhotoListViewController {
 }
 
 extension PhotoListViewController: PhotoListViewDelegate {
-    func photoListView(didSelect photo: Photo) {
+    func photoListView(didSelect photo: Photo, cellView: UICollectionViewCell?) {
         DispatchQueue.main.async {
+            self.customNavigationControllerDelegate.animatedInitialView = cellView
             let vc = PhotoDetailViewController(photo: photo)
             self.navigationController?.pushViewController(
                 vc,

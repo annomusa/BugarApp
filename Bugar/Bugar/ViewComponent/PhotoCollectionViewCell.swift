@@ -44,9 +44,20 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
         
         image.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         image.sd_setImage(
-            with: URL(string: photo.urls.small),
+            with: URL(string: photo.urls.thumb),
             placeholderImage: placeholder,
-            completed: nil
+            completed: { _, _, cacheType, url in
+                print("-- cell")
+                print(cacheType.rawValue, url!.absoluteString)
+            }
         )
+    }
+}
+
+extension PhotoCollectionViewCell: Snapshotable {
+    func getSnapshot() -> UIView {
+        let snapshotView = UIImageView(image: image.image)
+        snapshotView.frame = image.frame
+        return snapshotView
     }
 }

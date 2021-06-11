@@ -28,7 +28,7 @@ final class MainTabViewController: UITabBarController {
     private func setupVCs() {
         let service = SearchPhotosService(urlSession: URLSession.shared)
         let photoListVC = PhotoListViewController(searchService: service)
-        let photoListNavCon = UINavigationController(rootViewController: photoListVC)
+        let photoListNavCon = CustomNavigation(rootViewController: photoListVC)
         photoListNavCon.view.backgroundColor = .systemBackground
         photoListNavCon.tabBarItem.title = "Photo"
         photoListNavCon.tabBarItem.image = UIImage(systemName: "photo.fill.on.rectangle.fill")

@@ -11,7 +11,7 @@ import UIKit
 let photoCellID = "photoCellID"
 
 protocol PhotoListViewDelegate: AnyObject {
-    func photoListView(didSelect photo: Photo)
+    func photoListView(didSelect photo: Photo, cellView: UICollectionViewCell?)
 }
 
 final class PhotoListView: UIView {
@@ -41,7 +41,6 @@ final class PhotoListView: UIView {
         addSubview(collectionView)
         collectionView.frame = frame
         collectionView.alwaysBounceVertical = true
-        collectionView.backgroundColor = .white
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: photoCellID)
         collectionView.reloadData()
         collectionView.delegate = self
@@ -98,7 +97,7 @@ extension PhotoListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoCellID, for: indexPath) as? PhotoCollectionViewCell
             else { return UICollectionViewCell() }
-        cell.backgroundColor = .white
+        cell.backgroundColor = .systemBackground
         cell.set(photo: photos[indexPath.row])
         return cell
     }
@@ -108,7 +107,8 @@ extension PhotoListView: UICollectionViewDataSource {
 extension PhotoListView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        photoListDelegate?.photoListView(didSelect: photos[indexPath.row])
+        let cellView = collectionView.cellForItem(at: indexPath)
+        photoListDelegate?.photoListView(didSelect: photos[indexPath.row], cellView: cellView)
     }
     
     func collectionView(
