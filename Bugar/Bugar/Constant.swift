@@ -25,5 +25,6 @@ struct Constants {
         static let geo: String = "geo"
         static let consumerKey: String = "client_id"
         static let page: String = "page"
+        static let perPage: String = "per_page"
     }
 }

@@ -6,9 +6,9 @@
 import Foundation
 
 // MARK: - Welcome
-struct Welcome: Codable {
+struct SearchPhotosResult: Codable {
     let total, totalPages: Int
-    let results: [PhotoList]
+    let results: [Photo]
 
     enum CodingKeys: String, CodingKey {
         case total
@@ -18,30 +18,19 @@ struct Welcome: Codable {
 }
 
 // MARK: - Result
-struct PhotoList: Codable {
+struct Photo: Codable {
     let id: String
-    let createdAt, updatedAt, promotedAt: Date?
-    let width, height: Int
-    let color, blurHash, resultDescription, altDescription: String?
+    let createdAt, updatedAt: Date?
+    let blurHash: String?
     let urls: Urls
     let likes: Int
-    let likedByUser: Bool
-    let currentUserCollections: [JSONAny]
-    let sponsorship: JSONNull?
 
     enum CodingKeys: String, CodingKey {
         case id
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case promotedAt = "promoted_at"
-        case width, height, color
         case blurHash = "blur_hash"
-        case resultDescription = "description"
-        case altDescription = "alt_description"
         case urls, likes
-        case likedByUser = "liked_by_user"
-        case currentUserCollections = "current_user_collections"
-        case sponsorship
     }
 }
 
@@ -51,65 +40,12 @@ struct Urls: Codable {
     let thumb: String
 }
 
-// MARK: - User
-struct User: Codable {
-    let id: String
-    let updatedAt: Date
-    let username, name, firstName, lastName: String
-    let twitterUsername: String
-    let portfolioURL: String
-    let bio, location: String
-    let links: UserLinks
-    let profileImage: ProfileImage
-    let instagramUsername: String
-    let totalCollections, totalLikes, totalPhotos: Int
-    let acceptedTos, forHire: Bool
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case updatedAt = "updated_at"
-        case username, name
-        case firstName = "first_name"
-        case lastName = "last_name"
-        case twitterUsername = "twitter_username"
-        case portfolioURL = "portfolio_url"
-        case bio, location, links
-        case profileImage = "profile_image"
-        case instagramUsername = "instagram_username"
-        case totalCollections = "total_collections"
-        case totalLikes = "total_likes"
-        case totalPhotos = "total_photos"
-        case acceptedTos = "accepted_tos"
-        case forHire = "for_hire"
-    }
-}
-
-// MARK: - UserLinks
-struct UserLinks: Codable {
-    let linksSelf, html, photos, likes: String
-    let portfolio, following, followers: String
-
-    enum CodingKeys: String, CodingKey {
-        case linksSelf = "self"
-        case html, photos, likes, portfolio, following, followers
-    }
-}
-
-// MARK: - ProfileImage
-struct ProfileImage: Codable {
-    let small, medium, large: String
-}
-
 // MARK: - Encode/decode helpers
 
 class JSONNull: Codable, Hashable {
 
     public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
         return true
-    }
-
-    public var hashValue: Int {
-        return 0
     }
 
     public init() {}
@@ -124,6 +60,10 @@ class JSONNull: Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encodeNil()
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(-1)
     }
 }
 

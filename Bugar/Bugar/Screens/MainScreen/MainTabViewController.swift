@@ -18,34 +18,18 @@ final class MainTabViewController: UITabBarController {
         tabBar.tintColor = .label
         
         setupVCs()
-        
-        testUnsplashAPI()
-    }
-    
-    private func testUnsplashAPI() {
-        let request = Request<Welcome>(
-            url: Constants.UnsplashURLs.searchEndpoint,
-            method: .get,
-            query: [
-                Constants.UnsplashQuery.query: "fitness",
-                Constants.UnsplashQuery.page: "1",
-                Constants.UnsplashQuery.consumerKey: Constants.UnsplashBase.unsplashKey
-            ]
-        )
-        
-        URLSession.shared.call(request: request) { result in
-            switch result {
-            case .success(let res):
-                print(res.results.count)
-            case .failure(let err):
-                print(err)
-            }
-        }
     }
     
     private func setupVCs() {
+        let service = SearchPhotosService(urlSession: URLSession.shared)
+        let photoListVC = PhotoListViewController(searchService: service)
+        let photoListNavCon = UINavigationController(rootViewController: photoListVC)
+        photoListNavCon.tabBarItem.title = title
+        photoListNavCon.tabBarItem.image = UIImage(systemName: "photo.fill.on.rectangle.fill")
+        photoListNavCon.navigationBar.prefersLargeTitles = false
+        
         viewControllers = [
-            
+            photoListNavCon
         ]
     }
 }
