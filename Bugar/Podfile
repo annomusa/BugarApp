@@ -3,8 +3,6 @@ use_frameworks! :linkage => :static
 
 target 'Bugar' do
 
-  pod 'Texture', :git => 'https://github.com/TextureGroup/Texture.git', :commit => '03e7d1f'
-
   target 'BugarTests' do
     inherit! :search_paths
     

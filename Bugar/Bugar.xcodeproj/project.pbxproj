@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		12FD0EDD1334C724AD3F4D71 /* Pods_Bugar_BugarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D9CEA2B5D61254BD3AB324 /* Pods_Bugar_BugarUITests.framework */; };
 		3E7EA5C6860143E3DCEB828C /* Pods_BugarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7CDF89ED260990E1E42CBF /* Pods_BugarTests.framework */; };
+		B10A965526731E3F00CE900D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B10A965426731E3F00CE900D /* SDWebImage */; };
 		B10BE317266A3BED0057372B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10BE316266A3BED0057372B /* AppDelegate.swift */; };
 		B10BE319266A3BED0057372B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10BE318266A3BED0057372B /* SceneDelegate.swift */; };
 		B10BE320266A3BEE0057372B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10BE31F266A3BEE0057372B /* Assets.xcassets */; };
@@ -29,6 +30,8 @@
 		B1DF562A26725E6C0034C073 /* SearchPhotosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DF562926725E6C0034C073 /* SearchPhotosService.swift */; };
 		B1DF5631267314E10034C073 /* PhotoListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DF5630267314E10034C073 /* PhotoListViewControllerTests.swift */; };
 		B1DF56342673152F0034C073 /* MockPhotoSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DF56332673152F0034C073 /* MockPhotoSearcher.swift */; };
+		B1DF56362673185D0034C073 /* PhotoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DF56352673185D0034C073 /* PhotoListView.swift */; };
+		B1DF563826731C170034C073 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DF563726731C170034C073 /* PhotoCollectionViewCell.swift */; };
 		BB99D5263A7F66EAA70685BE /* Pods_Bugar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76733DA70596A2E83C04042B /* Pods_Bugar.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +87,8 @@
 		B1DF562926725E6C0034C073 /* SearchPhotosService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosService.swift; sourceTree = "<group>"; };
 		B1DF5630267314E10034C073 /* PhotoListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListViewControllerTests.swift; sourceTree = "<group>"; };
 		B1DF56332673152F0034C073 /* MockPhotoSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoSearcher.swift; sourceTree = "<group>"; };
+		B1DF56352673185D0034C073 /* PhotoListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoListView.swift; sourceTree = "<group>"; };
+		B1DF563726731C170034C073 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		C466CC09EA2A1AE8288E4852 /* Pods-Bugar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bugar.debug.xcconfig"; path = "Target Support Files/Pods-Bugar/Pods-Bugar.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B10A965526731E3F00CE900D /* SDWebImage in Frameworks */,
 				BB99D5263A7F66EAA70685BE /* Pods_Bugar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,6 +270,7 @@
 		B1DF5622267213300034C073 /* PhotoListScreen */ = {
 			isa = PBXGroup;
 			children = (
+				B1DF56352673185D0034C073 /* PhotoListView.swift */,
 				B1DF5625267225600034C073 /* PhotoListViewController.swift */,
 			);
 			path = PhotoListScreen;
@@ -272,6 +279,7 @@
 		B1DF562726725C340034C073 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
+				B1DF563726731C170034C073 /* PhotoCollectionViewCell.swift */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -317,6 +325,9 @@
 			dependencies = (
 			);
 			name = Bugar;
+			packageProductDependencies = (
+				B10A965426731E3F00CE900D /* SDWebImage */,
+			);
 			productName = Bugar;
 			productReference = B10BE313266A3BED0057372B /* Bugar.app */;
 			productType = "com.apple.product-type.application";
@@ -390,6 +401,9 @@
 				Base,
 			);
 			mainGroup = B10BE30A266A3BED0057372B;
+			packageReferences = (
+				B10A965326731E3F00CE900D /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = B10BE314266A3BED0057372B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -502,6 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1DF5626267225600034C073 /* PhotoListViewController.swift in Sources */,
+				B1DF563826731C170034C073 /* PhotoCollectionViewCell.swift in Sources */,
 				B1BCB88E267111DB004EA191 /* ContentType.swift in Sources */,
 				B10BE317266A3BED0057372B /* AppDelegate.swift in Sources */,
 				B1DF562A26725E6C0034C073 /* SearchPhotosService.swift in Sources */,
@@ -512,6 +527,7 @@
 				B10BE347266A4EE10057372B /* Constant.swift in Sources */,
 				B1BCB89726711D8D004EA191 /* URLSession+Request.swift in Sources */,
 				B192F221266DF0A1001E53CA /* MainTabViewController.swift in Sources */,
+				B1DF56362673185D0034C073 /* PhotoListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,6 +859,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B10A965326731E3F00CE900D /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B10A965426731E3F00CE900D /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B10A965326731E3F00CE900D /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B10BE30B266A3BED0057372B /* Project object */;
 }

@@ -6,9 +6,9 @@
 //
 
 import UIKit
-import AsyncDisplayKit
 
 final class MainTabViewController: UITabBarController {
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +16,8 @@ final class MainTabViewController: UITabBarController {
         view.backgroundColor = .systemBackground
         UITabBar.appearance().barTintColor = .systemBackground
         tabBar.tintColor = .label
-        
+        navigationController?.isNavigationBarHidden = true
+        navigationController?.navigationController?.isToolbarHidden = true
         setupVCs()
     }
     
@@ -24,7 +25,7 @@ final class MainTabViewController: UITabBarController {
         let service = SearchPhotosService(urlSession: URLSession.shared)
         let photoListVC = PhotoListViewController(searchService: service)
         let photoListNavCon = UINavigationController(rootViewController: photoListVC)
-        photoListNavCon.tabBarItem.title = title
+        photoListNavCon.tabBarItem.title = "Photo"
         photoListNavCon.tabBarItem.image = UIImage(systemName: "photo.fill.on.rectangle.fill")
         photoListNavCon.navigationBar.prefersLargeTitles = false
         
