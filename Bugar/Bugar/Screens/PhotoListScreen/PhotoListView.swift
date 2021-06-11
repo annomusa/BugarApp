@@ -52,9 +52,9 @@ final class PhotoListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func invalidateLayout(frame: CGRect) {
-        self.frame = frame
-        collectionView.frame = frame
+    func invalidateLayout(size: CGSize) {
+        self.setSizeFrom(size)
+        collectionView.setSizeFrom(size)
         collectionView.collectionViewLayout.invalidateLayout()
     }
     

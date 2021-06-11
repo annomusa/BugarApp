@@ -13,8 +13,6 @@ final class PhotoDetailViewController: UIViewController {
     private var photoDetailView: PhotoDetailView?
     private let photo: Photo
     
-    private var imageView: UIImageView = UIImageView()
-    
     init(photo: Photo, indexPath: IndexPath = IndexPath()) {
         self.photo = photo
         
@@ -33,5 +31,11 @@ final class PhotoDetailViewController: UIViewController {
         photoDetailView = PhotoDetailView(photo: photo)
         photoDetailView?.frame = view.frame
         self.view.addSubview(photoDetailView!)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        photoDetailView?.showImage()
     }
 }

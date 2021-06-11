@@ -13,6 +13,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     
     var image: UIImageView = UIImageView()
     var photo: Photo?
+    var placeholder: UIImage?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,10 +23,14 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(image)
         image.clipsToBounds = true
+        image.contentMode = .scaleAspectFill
     }
     
     func set(photo: Photo) {
         self.photo = photo
+        if let blurHash = photo.blurHash {
+            placeholder = UIImage(blurHash: blurHash, size: frame.size)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -37,14 +42,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
         
         guard let photo = photo else { return }
         
-        let ratio: CGFloat = CGFloat(photo.width) / CGFloat(photo.height)
-        let placeholderSize: CGSize = CGSize(width: frame.width, height: ratio * frame.width)
-        var placeholder: UIImage?
-        if let blurHash = photo.blurHash {
-            placeholder = UIImage(blurHash: blurHash, size: placeholderSize)
-        }
         image.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-        image.contentMode = .scaleAspectFill
         image.sd_setImage(
             with: URL(string: photo.urls.small),
             placeholderImage: placeholder,

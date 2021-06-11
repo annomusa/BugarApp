@@ -27,17 +27,24 @@ final class PhotoDetailView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        let ratio: CGFloat = CGFloat(photo.height) / CGFloat(photo.width)
+        let imageSize: CGSize = CGSize(width: frame.width, height: ratio * frame.width)
+        
         backgroundColor = .systemBackground
         addSubview(imageView)
-        imageView.backgroundColor = .systemBackground
-        imageView.frame = self.frame
+        imageView.backgroundColor = .gray
         imageView.contentMode = .scaleAspectFit
+        imageView.setW(imageSize.width, andH: imageSize.height)
+        imageView.center(with: self)
+    }
+    
+    func showImage() {
+        let ratio: CGFloat = CGFloat(photo.height) / CGFloat(photo.width)
+        let imageSize: CGSize = CGSize(width: frame.width, height: ratio * frame.width)
         
         var placeholder: UIImage?
-        let ratio: CGFloat = CGFloat(photo.height) / CGFloat(photo.width)
-        let placeholderSize: CGSize = CGSize(width: frame.width, height: ratio * frame.width)
         if let blurHash = photo.blurHash {
-            placeholder = UIImage(blurHash: blurHash, size: placeholderSize)
+            placeholder = UIImage(blurHash: blurHash, size: imageSize)
         }
         
         imageView.sd_setImage(
@@ -48,6 +55,5 @@ final class PhotoDetailView: UIView {
             },
             completed: nil
         )
-        imageView.center(with: self)
     }
 }

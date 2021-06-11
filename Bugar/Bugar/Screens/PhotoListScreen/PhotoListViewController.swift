@@ -42,9 +42,7 @@ final class PhotoListViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: nil) { context in
-            self.photoListView?.invalidateLayout(frame: self.view.frame)
-        }
+        self.photoListView?.invalidateLayout(size: size)
     }
 }
 
@@ -58,7 +56,6 @@ private extension PhotoListViewController {
             onComplete: { [weak self] result in
                 guard let s = self else { return }
                 s.searchPhotoResult = result
-                dump(result)
                 switch result {
                 case .success(let searchResult):
                     s.onSuccessFetch(photos: searchResult.results)
