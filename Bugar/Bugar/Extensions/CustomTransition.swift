@@ -16,6 +16,7 @@ class CustomTransition: NSObject,
                         UIViewControllerAnimatedTransitioning {
     
     var animatedInitialView: UIView?
+    var photo: Photo?
     
     func transitionDuration(
         using transitionContext: UIViewControllerContextTransitioning?
@@ -46,11 +47,22 @@ class CustomTransition: NSObject,
         let leftUpperPoint = animatedInitialView.convert(CGPoint.zero, to: nil)
         snapshotView.setXAndYFrom(leftUpperPoint)
         
+        func calculateToViewSize() -> CGSize {
+            guard let photo = photo else { return toView.frame.size }
+            
+            let ratio: CGFloat = CGFloat(photo.height) / CGFloat(photo.width)
+            let width: CGFloat = toView.width
+            let height: CGFloat = width * ratio
+            return CGSize(width: toView.width, height: height)
+        }
+        
         UIView.animate(
             withDuration: 0.2,
             animations: {
-                let animatedViewScale: CGFloat = toView.width / animatedInitialView.width
-                snapshotView.transform = CGAffineTransform(scaleX: animatedViewScale, y: animatedViewScale)
+                let toViewSize = calculateToViewSize()
+                let animatedViewScaleX: CGFloat = toViewSize.width / snapshotView.width
+                let animatedViewScaleY: CGFloat = toViewSize.height / snapshotView.height
+                snapshotView.transform = CGAffineTransform(scaleX: animatedViewScaleX, y: animatedViewScaleY)
                 snapshotView.setSizeFrom(snapshotView.frame.size)
                 snapshotView.center(with: toView)
                 toView.alpha = 1

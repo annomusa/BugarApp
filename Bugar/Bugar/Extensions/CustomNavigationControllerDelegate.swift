@@ -12,6 +12,7 @@ final class CustomNavigationControllerDelegate: NSObject,
                                                 UINavigationControllerDelegate {
     
     var animatedInitialView: UIView?
+    var photo: Photo?
     
     func navigationController(
         _ navigationController: UINavigationController,
@@ -23,6 +24,7 @@ final class CustomNavigationControllerDelegate: NSObject,
         if operation == .push, let animatedView = animatedInitialView {
             let transition = CustomTransition()
             transition.animatedInitialView = animatedView
+            transition.photo = photo
             return transition
         } else if operation == .pop {
             return nil

@@ -56,9 +56,16 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
 
 extension PhotoCollectionViewCell: Snapshotable {
     func getSnapshot() -> UIView {
-        let snapshotView = UIImageView(image: image.image)
+        guard let photo = photo else { return UIView() }
         
-        snapshotView.frame = image.frame
+        let snapshotView: UIImageView = UIImageView(image: image.image)
+        
+        let isLandscape = photo.width > photo.height
+        let ratio: CGFloat = isLandscape ? CGFloat(photo.width) / CGFloat(photo.height) : CGFloat(photo.height) / CGFloat(photo.width)
+        let snapshotWidth: CGFloat = isLandscape ? (image.frame.width * ratio) : image.frame.width
+        let snapshotHeigth: CGFloat = isLandscape ? image.frame.height : (image.frame.height * ratio)
+        snapshotView.setXAndYFrom(image.frame.origin)
+        snapshotView.setW(snapshotWidth, andH: snapshotHeigth)
         return snapshotView
     }
 }

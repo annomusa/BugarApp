@@ -51,6 +51,7 @@ final class PhotoListViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        
         self.photoListView?.invalidateLayout(size: size)
     }
 }
@@ -97,6 +98,7 @@ extension PhotoListViewController: PhotoListViewDelegate {
     func photoListView(didSelect photo: Photo, cellView: UICollectionViewCell?) {
         DispatchQueue.main.async {
             self.customNavigationControllerDelegate.animatedInitialView = cellView
+            self.customNavigationControllerDelegate.photo = photo
             let vc = PhotoDetailViewController(photo: photo)
             self.navigationController?.pushViewController(
                 vc,
