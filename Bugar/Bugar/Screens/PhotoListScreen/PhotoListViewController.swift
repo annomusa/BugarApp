@@ -72,7 +72,7 @@ private extension PhotoListViewController {
     
     private func prefetchLargeImage(photos: [Photo]) {
         SDWebImagePrefetcher.shared.prefetchURLs(
-            photos.compactMap { URL(string: $0.urls.full) },
+            photos.compactMap { URL(string: $0.urls.regular) },
             progress: { noOfFinishedUrls, noOfTotalUrls in
                 print(noOfFinishedUrls, noOfTotalUrls)
             },

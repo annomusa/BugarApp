@@ -7,11 +7,12 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 final class PhotoDetailViewController: UIViewController {
     
-    private var photoDetailView: PhotoDetailView?
     private let photo: Photo
+    private var imageScrollView: ImageScrollView?
     
     private var showImageOnly: Bool = false
     
@@ -30,10 +31,11 @@ final class PhotoDetailViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        photoDetailView = PhotoDetailView(photo: photo)
-        photoDetailView?.frame = view.frame
-        photoDetailView?.delegate = self
-        self.view.addSubview(photoDetailView!)
+        imageScrollView = ImageScrollView(photo: photo)
+        imageScrollView?.frame = view.frame
+        imageScrollView?.imageScrollViewDelegate = self
+        self.view.addSubview(imageScrollView!)
+        imageScrollView?.setup()
     }
     
     override func viewDidLoad() {
@@ -44,25 +46,29 @@ final class PhotoDetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        photoDetailView?.showImage()
+        let image = SDImageCache.shared.imageFromCache(forKey: photo.urls.regular)
+        if let img = image {
+            imageScrollView?.frame = view.frame
+            imageScrollView?.display(image: img)
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        photoDetailView?.invalidateLayout(size: size)
+        imageScrollView?.invalidateLayout(size: size)
     }
     
     override var prefersStatusBarHidden: Bool {
-        showImageOnly
+        return showImageOnly
     }
     
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        .slide
+        return .slide
     }
 }
 
-extension PhotoDetailViewController: PhotoDetailViewDelegate {
-    func photoDetailOnTap() {
+extension PhotoDetailViewController: ImageScrollViewDelegate {
+    func imageScrollViewOnTap() {
         showImageOnly = !showImageOnly
         setNeedsStatusBarAppearanceUpdate()
         
