@@ -9,19 +9,15 @@ import UIKit
 
 final class MainTabViewController: UITabBarController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         
         view.backgroundColor = .systemBackground
+        
         UITabBar.appearance().barTintColor = .systemBackground
         tabBar.tintColor = .label
         tabBar.backgroundColor = .systemBackground
-        navigationController?.isNavigationBarHidden = true
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.view.backgroundColor = .systemBackground
-        navigationController?.navigationController?.isToolbarHidden = true
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        hidesBottomBarWhenPushed = true
+        
         setupVCs()
     }
     

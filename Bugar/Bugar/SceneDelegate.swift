@@ -17,10 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        let vc = MainTabViewController()
         
         let window = UIWindow(windowScene: windowScene)
         window.backgroundColor = .systemBackground
-        let vc = MainTabViewController()
         window.rootViewController = vc
         
         self.window = window

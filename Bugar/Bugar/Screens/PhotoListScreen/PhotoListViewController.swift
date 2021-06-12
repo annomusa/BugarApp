@@ -40,8 +40,13 @@ final class PhotoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        hidesBottomBarWhenPushed = true
         fetchPhotos()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tabBarController?.tabBar.isHidden = false
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
