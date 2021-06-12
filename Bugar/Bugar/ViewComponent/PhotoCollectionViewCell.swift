@@ -57,6 +57,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
 extension PhotoCollectionViewCell: Snapshotable {
     func getSnapshot() -> UIView {
         let snapshotView = UIImageView(image: image.image)
+        
         snapshotView.frame = image.frame
         return snapshotView
     }

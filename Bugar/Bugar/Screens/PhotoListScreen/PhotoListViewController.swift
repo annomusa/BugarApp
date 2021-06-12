@@ -40,6 +40,7 @@ final class PhotoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hidesBottomBarWhenPushed = true
         fetchPhotos()
     }
     

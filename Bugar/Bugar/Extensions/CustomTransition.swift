@@ -41,6 +41,8 @@ class CustomTransition: NSObject,
         containerView.addSubview(toView)
         containerView.addSubview(snapshotView)
         
+        toView.alpha = 0
+        
         let leftUpperPoint = animatedInitialView.convert(CGPoint.zero, to: nil)
         snapshotView.setXAndYFrom(leftUpperPoint)
         
@@ -51,6 +53,7 @@ class CustomTransition: NSObject,
                 snapshotView.transform = CGAffineTransform(scaleX: animatedViewScale, y: animatedViewScale)
                 snapshotView.setSizeFrom(snapshotView.frame.size)
                 snapshotView.center(with: toView)
+                toView.alpha = 1
             },
             completion: { isFinished in
                 guard isFinished else { return }

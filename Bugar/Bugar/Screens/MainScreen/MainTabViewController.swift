@@ -21,7 +21,7 @@ final class MainTabViewController: UITabBarController {
         navigationController?.view.backgroundColor = .systemBackground
         navigationController?.navigationController?.isToolbarHidden = true
         navigationController?.setNavigationBarHidden(true, animated: false)
-        
+        hidesBottomBarWhenPushed = true
         setupVCs()
     }
     
