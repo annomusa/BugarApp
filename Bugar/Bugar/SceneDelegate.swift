@@ -17,33 +17,42 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let vc = MainTabViewController()
+        
+        let service = SearchPhotosService(urlSession: URLSession.shared)
+        let vc = PhotoListViewController(searchService: service)
+        let navCon = UINavigationController(rootViewController: vc)
+        navCon.delegate = self
         
         let window = UIWindow(windowScene: windowScene)
         window.backgroundColor = .systemBackground
-        window.rootViewController = vc
         
         self.window = window
+        self.window?.rootViewController = navCon
         self.window?.makeKeyAndVisible()
     }
-    
-    func sceneDidDisconnect(_ scene: UIScene) {
+}
+
+extension SceneDelegate: UINavigationControllerDelegate {
+    func navigationController(
+        _ navigationController: UINavigationController,
+        animationControllerFor operation: UINavigationController.Operation,
+        from fromVC: UIViewController,
+        to toVC: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
         
-    }
-    
-    func sceneDidBecomeActive(_ scene: UIScene) {
+        if operation == .push,
+           let sourceAnimatable = fromVC as? PhotoSourceAnimatable,
+           let sourceView = sourceAnimatable.sourceView,
+           let photo = sourceAnimatable.photo {
+            
+            return CustomTransition(initialView: sourceView, photo: photo)
+            
+        } else if operation == .pop {
+            
+            return nil
+            
+        }
         
-    }
-    
-    func sceneWillResignActive(_ scene: UIScene) {
-        
-    }
-    
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        
-    }
-    
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        
+        return nil
     }
 }

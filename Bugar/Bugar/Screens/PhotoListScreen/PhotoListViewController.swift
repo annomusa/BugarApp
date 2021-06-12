@@ -11,11 +11,14 @@ import SDWebImage
 
 final class PhotoListViewController: UIViewController {
     
+    // MARK: - Dependencies
     private let searchService: PhotosSearcher
-    private var photoListView: PhotoListView?
-    var searchPhotoResult: Result<SearchPhotosResult, Error>?
     
-    var customNavigationControllerDelegate = CustomNavigationControllerDelegate()
+    // MARK: - Private Attributes
+    private var photoListView: PhotoListView?
+    private var searchPhotoResult: Result<SearchPhotosResult, Error>?
+    private var selectedView: UIView?
+    private var selectedPhoto: Photo?
     
     init(searchService: PhotosSearcher) {
         self.searchService = searchService
@@ -32,7 +35,7 @@ final class PhotoListViewController: UIViewController {
         
         photoListView = PhotoListView(frame: view.frame)
         photoListView?.photoListDelegate = self
-        navigationController?.delegate = customNavigationControllerDelegate
+        
         view.backgroundColor = .systemBackground
         view.addSubview(photoListView!)
     }
@@ -41,12 +44,6 @@ final class PhotoListViewController: UIViewController {
         super.viewDidLoad()
         
         fetchPhotos()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        tabBarController?.tabBar.isHidden = false
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -96,14 +93,16 @@ private extension PhotoListViewController {
 
 extension PhotoListViewController: PhotoListViewDelegate {
     func photoListView(didSelect photo: Photo, cellView: UICollectionViewCell?) {
-        DispatchQueue.main.async {
-            self.customNavigationControllerDelegate.animatedInitialView = cellView
-            self.customNavigationControllerDelegate.photo = photo
-            let vc = PhotoDetailViewController(photo: photo)
-            self.navigationController?.pushViewController(
-                vc,
-                animated: true
-            )
-        }
+        selectedPhoto = photo
+        selectedView = cellView
+        
+        let vc = PhotoDetailViewController(photo: photo)
+        navigationController?.pushViewController(vc, animated: true)
     }
+}
+
+extension PhotoListViewController: PhotoSourceAnimatable {
+    var sourceView: UIView? { selectedView }
+    
+    var photo: Photo? { selectedPhoto }
 }

@@ -15,8 +15,13 @@ protocol Snapshotable {
 class CustomTransition: NSObject,
                         UIViewControllerAnimatedTransitioning {
     
-    var animatedInitialView: UIView?
-    var photo: Photo?
+    private let animatedInitialView: UIView
+    private let photo: Photo
+    
+    init(initialView: UIView, photo: Photo) {
+        self.animatedInitialView = initialView
+        self.photo = photo
+    }
     
     func transitionDuration(
         using transitionContext: UIViewControllerContextTransitioning?
@@ -29,7 +34,6 @@ class CustomTransition: NSObject,
     ) {
         guard let fromView = transitionContext.viewController(forKey: .from)?.view,
               let toView = transitionContext.viewController(forKey: .to)?.view,
-              let animatedInitialView = animatedInitialView,
               let snapshotView = (animatedInitialView as? Snapshotable)?.getSnapshot()
         else {
             transitionContext.completeTransition(true)
@@ -48,8 +52,6 @@ class CustomTransition: NSObject,
         snapshotView.setXAndYFrom(leftUpperPoint)
         
         func calculateToViewSize() -> CGSize {
-            guard let photo = photo else { return toView.frame.size }
-            
             let ratio: CGFloat = CGFloat(photo.height) / CGFloat(photo.width)
             let width: CGFloat = toView.width
             let height: CGFloat = width * ratio
