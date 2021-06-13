@@ -62,7 +62,7 @@ extension PhotoDetailViewController: PhotoDetailViewDelegate {
     func photoDetailOnTap() {
         showImageOnly = !showImageOnly
         setNeedsStatusBarAppearanceUpdate()
-        navigationController?.setNavigationBarHidden(showImageOnly, animated: true)
+        navigationController?.setNavigationBarHidden(showImageOnly, animated: false)
     }
     
     func photoDetailDismissed() {

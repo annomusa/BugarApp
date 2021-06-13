@@ -47,6 +47,12 @@ final class PhotoListViewController: NiblessViewController {
         fetchPhotos()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
