@@ -24,6 +24,9 @@
 		B19AE1B6267524D700CF57FB /* PhotoSourceAnimatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19AE1B5267524D700CF57FB /* PhotoSourceAnimatable.swift */; };
 		B19AE1B82675C0E800CF57FB /* PhotoDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19AE1B72675C0E800CF57FB /* PhotoDetailCollectionViewCell.swift */; };
 		B19AE1BC26761B3700CF57FB /* CustomPopTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19AE1BB26761B3700CF57FB /* CustomPopTransition.swift */; };
+		B19AE1BE2676521200CF57FB /* NiblessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19AE1BD2676521200CF57FB /* NiblessViewController.swift */; };
+		B19AE1C0267652D100CF57FB /* NiblessCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19AE1BF267652D000CF57FB /* NiblessCollectionViewCell.swift */; };
+		B19AE1C22676535400CF57FB /* NiblessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19AE1C12676535400CF57FB /* NiblessView.swift */; };
 		B1BCB88E267111DB004EA191 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BCB88D267111DB004EA191 /* ContentType.swift */; };
 		B1BCB891267117EB004EA191 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BCB890267117EB004EA191 /* NetworkError.swift */; };
 		B1BCB89326711836004EA191 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BCB89226711836004EA191 /* Request.swift */; };
@@ -89,6 +92,9 @@
 		B19AE1B5267524D700CF57FB /* PhotoSourceAnimatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSourceAnimatable.swift; sourceTree = "<group>"; };
 		B19AE1B72675C0E800CF57FB /* PhotoDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		B19AE1BB26761B3700CF57FB /* CustomPopTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopTransition.swift; sourceTree = "<group>"; };
+		B19AE1BD2676521200CF57FB /* NiblessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiblessViewController.swift; sourceTree = "<group>"; };
+		B19AE1BF267652D000CF57FB /* NiblessCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiblessCollectionViewCell.swift; sourceTree = "<group>"; };
+		B19AE1C12676535400CF57FB /* NiblessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiblessView.swift; sourceTree = "<group>"; };
 		B1BCB88D267111DB004EA191 /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		B1BCB890267117EB004EA191 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		B1BCB89226711836004EA191 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -176,6 +182,9 @@
 				B10A965F2673524A00CE900D /* Bugar-Bridging-Header.h */,
 				B10A965E2673521000CE900D /* UIView+CBFrameHelpers.h */,
 				B10A96602673524A00CE900D /* UIView+CBFrameHelpers.m */,
+				B19AE1BD2676521200CF57FB /* NiblessViewController.swift */,
+				B19AE1BF267652D000CF57FB /* NiblessCollectionViewCell.swift */,
+				B19AE1C12676535400CF57FB /* NiblessView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -562,8 +571,11 @@
 				B19AE1B82675C0E800CF57FB /* PhotoDetailCollectionViewCell.swift in Sources */,
 				B10A965C26734D8D00CE900D /* PhotoDetailView.swift in Sources */,
 				B10A96612673524A00CE900D /* UIView+CBFrameHelpers.m in Sources */,
+				B19AE1C0267652D100CF57FB /* NiblessCollectionViewCell.swift in Sources */,
+				B19AE1C22676535400CF57FB /* NiblessView.swift in Sources */,
 				B19AE1BC26761B3700CF57FB /* CustomPopTransition.swift in Sources */,
 				B1BCB891267117EB004EA191 /* NetworkError.swift in Sources */,
+				B19AE1BE2676521200CF57FB /* NiblessViewController.swift in Sources */,
 				B1BCB89326711836004EA191 /* Request.swift in Sources */,
 				B10A9668267394CB00CE900D /* CustomPushTransition.swift in Sources */,
 				B10BE347266A4EE10057372B /* Constant.swift in Sources */,

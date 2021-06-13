@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SDWebImage
 
-final class PhotoCollectionViewCell: UICollectionViewCell {
+final class PhotoCollectionViewCell: NiblessCollectionViewCell {
     
     var image: UIImageView = UIImageView()
     var photo: Photo?
@@ -31,10 +31,6 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
         if let blurHash = photo.blurHash {
             placeholder = UIImage(blurHash: blurHash, size: frame.size)
         }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {

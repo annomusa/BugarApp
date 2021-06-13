@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SDWebImage
 
-final class PhotoDetailViewController: UIViewController {
+final class PhotoDetailViewController: NiblessViewController {
     
     private let photos: [Photo]
     private var currentIndex: Int
@@ -21,11 +21,7 @@ final class PhotoDetailViewController: UIViewController {
         self.photos = photos
         self.currentIndex = currentIndex
         
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init()
     }
     
     override func loadView() {
@@ -39,26 +35,10 @@ final class PhotoDetailViewController: UIViewController {
         view.addSubview(photoDetailView!)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         photoDetailView?.scrollToCurrentIndex()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        tabBarController?.tabBar.isHidden = true
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
     }
     
     override func viewWillTransition(

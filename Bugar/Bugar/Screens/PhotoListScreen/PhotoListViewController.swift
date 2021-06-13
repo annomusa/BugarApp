@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SDWebImage
 
-final class PhotoListViewController: UIViewController {
+final class PhotoListViewController: NiblessViewController {
     
     // MARK: - Dependencies
     private let searchService: PhotosSearcher
@@ -26,11 +26,7 @@ final class PhotoListViewController: UIViewController {
     init(searchService: PhotosSearcher) {
         self.searchService = searchService
         
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init()
     }
     
     override func loadView() {

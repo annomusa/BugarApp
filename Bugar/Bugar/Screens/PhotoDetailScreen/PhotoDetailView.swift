@@ -16,7 +16,7 @@ protocol PhotoDetailViewDelegate: AnyObject {
     func photoDetailDismissed()
 }
 
-final class PhotoDetailView: UIView {
+final class PhotoDetailView: NiblessView {
     
     private let photos: [Photo]
     private var currentIndex: Int
@@ -49,10 +49,6 @@ final class PhotoDetailView: UIView {
         
         backgroundColor = .systemBackground
         isUserInteractionEnabled = true
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {

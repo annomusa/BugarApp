@@ -14,7 +14,7 @@ protocol PhotoListViewDelegate: AnyObject {
     func photoListViewDidSelect(image: UIImage?, frame: CGRect, selectedIndex: Int)
 }
 
-final class PhotoListView: UIView {
+final class PhotoListView: NiblessView {
     
     weak var photoListDelegate: PhotoListViewDelegate?
     
@@ -45,10 +45,6 @@ final class PhotoListView: UIView {
         collectionView.reloadData()
         collectionView.delegate = self
         collectionView.dataSource = self
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func invalidateLayout(size: CGSize) {
