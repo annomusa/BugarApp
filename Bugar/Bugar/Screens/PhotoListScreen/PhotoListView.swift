@@ -11,19 +11,19 @@ import UIKit
 let photoCellID = "photoCellID"
 
 protocol PhotoListViewDelegate: AnyObject {
-    func photoListView(didSelect photo: Photo, cellView: UICollectionViewCell?)
+    func photoListViewDidSelect(image: UIImage?, frame: CGRect, selectedIndex: Int)
 }
 
 final class PhotoListView: UIView {
     
     weak var photoListDelegate: PhotoListViewDelegate?
     
-    private let collectionView: UICollectionView
+    let collectionView: UICollectionView
     private let collectionViewLayout: UICollectionViewFlowLayout
     private var photos: [Photo] = []
     private var itemsPerRow: CGFloat = 5
     private var paddingSpace: CGFloat = 1
-    private var sectionInsets: UIEdgeInsets = .zero // .init(top: 2, left: 2, bottom: 2, right: 2)
+    private var sectionInsets: UIEdgeInsets = .zero
     
     override init(frame: CGRect) {
         let layout = UICollectionViewFlowLayout()
@@ -106,9 +106,17 @@ extension PhotoListView: UICollectionViewDataSource {
 
 extension PhotoListView: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cellView = collectionView.cellForItem(at: indexPath)
-        photoListDelegate?.photoListView(didSelect: photos[indexPath.row], cellView: cellView)
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath) {
+        print("ffff \(indexPath)")
+        guard let cellView = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell else { return }
+        let cellFrame = collectionView.convert(cellView.frame, to: window)
+        photoListDelegate?.photoListViewDidSelect(
+            image: cellView.image.image,
+            frame: cellFrame,
+            selectedIndex: indexPath.row
+        )
     }
     
     func collectionView(

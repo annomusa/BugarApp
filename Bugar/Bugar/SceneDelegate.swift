@@ -41,13 +41,16 @@ extension SceneDelegate: UINavigationControllerDelegate {
     ) -> UIViewControllerAnimatedTransitioning? {
         
         if operation == .push,
-           let sourceAnimatable = fromVC as? PhotoSourceAnimatable,
-           let sourceView = sourceAnimatable.sourceView,
-           let photo = sourceAnimatable.photo {
+           let sourceAnimatable = (fromVC as? PhotoSourceAnimatable),
+           let sourceImage = sourceAnimatable.sourceImage,
+           let sourceFrame = sourceAnimatable.sourceFrame,
+           let sourcePhoto = sourceAnimatable.sourcePhoto {
             
-            return CustomTransition(initialView: sourceView, photo: photo)
+            return CustomTransition(sourceImage: sourceImage, sourceFrame: sourceFrame, sourcePhoto: sourcePhoto)
             
-        } else if operation == .pop {
+        } else if operation == .pop,
+                  let sourceAnimatable = fromVC as? PhotoSourceAnimatable,
+                  let _ = sourceAnimatable.sourceImage {
             
             return nil
             

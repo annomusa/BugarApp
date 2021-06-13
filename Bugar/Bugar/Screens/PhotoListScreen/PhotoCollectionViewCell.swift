@@ -47,25 +47,8 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
             with: URL(string: photo.urls.thumb),
             placeholderImage: placeholder,
             completed: { _, _, cacheType, url in
-                print("-- cell")
-                print(cacheType.rawValue, url!.absoluteString)
+                
             }
         )
-    }
-}
-
-extension PhotoCollectionViewCell: Snapshotable {
-    func getSnapshot() -> UIView {
-        guard let photo = photo else { return UIView() }
-        
-        let snapshotView: UIImageView = UIImageView(image: image.image)
-        
-        let isLandscape = photo.width > photo.height
-        let ratio: CGFloat = isLandscape ? CGFloat(photo.width) / CGFloat(photo.height) : CGFloat(photo.height) / CGFloat(photo.width)
-        let snapshotWidth: CGFloat = isLandscape ? (image.frame.width * ratio) : image.frame.width
-        let snapshotHeigth: CGFloat = isLandscape ? image.frame.height : (image.frame.height * ratio)
-        snapshotView.setXAndYFrom(image.frame.origin)
-        snapshotView.setW(snapshotWidth, andH: snapshotHeigth)
-        return snapshotView
     }
 }

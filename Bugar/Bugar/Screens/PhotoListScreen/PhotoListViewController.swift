@@ -17,8 +17,11 @@ final class PhotoListViewController: UIViewController {
     // MARK: - Private Attributes
     private var photoListView: PhotoListView?
     private var searchPhotoResult: Result<SearchPhotosResult, Error>?
-    private var selectedView: UIView?
-    private var selectedPhoto: Photo?
+    
+    // MARK: - Snapshot for custom transition
+    private(set) var selectedImage: UIImage?
+    private(set) var selectedFrame: CGRect?
+    private(set) var selectedPhoto: Photo?
     
     init(searchService: PhotosSearcher) {
         self.searchService = searchService
@@ -38,6 +41,8 @@ final class PhotoListViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         view.addSubview(photoListView!)
+            
+        title = "Fitness Inspiration"
     }
     
     override func viewDidLoad() {
@@ -92,17 +97,21 @@ private extension PhotoListViewController {
 }
 
 extension PhotoListViewController: PhotoListViewDelegate {
-    func photoListView(didSelect photo: Photo, cellView: UICollectionViewCell?) {
-        selectedPhoto = photo
-        selectedView = cellView
+    func photoListViewDidSelect(image: UIImage?, frame: CGRect, selectedIndex: Int) {
+        guard let photos = try? searchPhotoResult?.get().results else {
+            return
+        }
+        selectedPhoto = photos[selectedIndex]
+        selectedImage = image
+        selectedFrame = frame
         
-        let vc = PhotoDetailViewController(photo: photo)
+        let vc = PhotoDetailViewController(photos: photos, currentIndex: selectedIndex)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension PhotoListViewController: PhotoSourceAnimatable {
-    var sourceView: UIView? { selectedView }
-    
-    var photo: Photo? { selectedPhoto }
+    var sourceImage: UIImage? { selectedImage }
+    var sourceFrame: CGRect? { selectedFrame }
+    var sourcePhoto: Photo? { selectedPhoto }
 }

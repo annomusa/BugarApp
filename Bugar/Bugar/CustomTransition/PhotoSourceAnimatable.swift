@@ -8,6 +8,7 @@
 import Foundation
 
 protocol PhotoSourceAnimatable {
-    var sourceView: UIView? { get }
-    var photo: Photo? { get }
+    var sourceImage: UIImage? { get }
+    var sourceFrame: CGRect? { get }
+    var sourcePhoto: Photo? { get }
 }

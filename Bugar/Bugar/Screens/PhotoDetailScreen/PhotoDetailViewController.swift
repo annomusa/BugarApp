@@ -11,13 +11,15 @@ import SDWebImage
 
 final class PhotoDetailViewController: UIViewController {
     
-    private let photo: Photo
-    private var imageScrollView: ImageScrollView?
-    
+    private let photos: [Photo]
+    private var currentIndex: Int
     private var showImageOnly: Bool = false
     
-    init(photo: Photo, indexPath: IndexPath = IndexPath()) {
-        self.photo = photo
+    private var photoDetailView: PhotoDetailView?
+    
+    init(photos: [Photo], currentIndex: Int) {
+        self.photos = photos
+        self.currentIndex = currentIndex
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,16 +33,21 @@ final class PhotoDetailViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        imageScrollView = ImageScrollView(photo: photo)
-        imageScrollView?.frame = view.frame
-        imageScrollView?.imageScrollViewDelegate = self
-        self.view.addSubview(imageScrollView!)
-        imageScrollView?.setup()
+        photoDetailView = PhotoDetailView(frame: view.frame, photos: photos, currentIndex: currentIndex)
+        photoDetailView?.delegate = self
+        photoDetailView?.frame = view.frame
+        view.addSubview(photoDetailView!)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        photoDetailView?.scrollToCurrentIndex()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,16 +59,14 @@ final class PhotoDetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let image = SDImageCache.shared.imageFromCache(forKey: photo.urls.regular)
-        if let img = image {
-            imageScrollView?.frame = view.frame
-            imageScrollView?.display(image: img)
-        }
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(
+        to size: CGSize,
+        with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        imageScrollView?.invalidateLayout(size: size)
+        
+        photoDetailView?.invalidateLayout(size: size)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -73,15 +78,14 @@ final class PhotoDetailViewController: UIViewController {
     }
 }
 
-extension PhotoDetailViewController: ImageScrollViewDelegate {
-    func imageScrollViewOnTap() {
+extension PhotoDetailViewController: PhotoDetailViewDelegate {
+    func photoDetailOnTap() {
         showImageOnly = !showImageOnly
         setNeedsStatusBarAppearanceUpdate()
-        
-        if showImageOnly {
-            navigationController?.setNavigationBarHidden(true, animated: true)
-        } else {
-            navigationController?.setNavigationBarHidden(false, animated: true)
-        }
+        navigationController?.setNavigationBarHidden(showImageOnly, animated: true)
+    }
+    
+    func photoDetailDismissed() {
+        navigationController?.popViewController(animated: true)
     }
 }

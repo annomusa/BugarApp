@@ -9,38 +9,46 @@ import Foundation
 import UIKit
 import BlurHash
 
+let photoDetailCellID = "photoCellID"
+
 protocol PhotoDetailViewDelegate: AnyObject {
     func photoDetailOnTap()
+    func photoDetailDismissed()
 }
 
 final class PhotoDetailView: UIView {
     
-    private let photo: Photo
-    private var imageView: UIImageView = UIImageView()
+    private let photos: [Photo]
+    private var currentIndex: Int
+    private let collectionView: UICollectionView
     
     weak var delegate: PhotoDetailViewDelegate?
     
-    init(photo: Photo) {
-        self.photo = photo
+    init(frame: CGRect, photos: [Photo], currentIndex: Int) {
+        self.photos = photos
+        self.currentIndex = currentIndex
         
-        super.init(frame: .zero)
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 20
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(PhotoDetailCollectionViewCell.self, forCellWithReuseIdentifier: photoDetailCellID)
+        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.allowsMultipleSelection = true
+        collectionView.isPagingEnabled = true
+        collectionView.alwaysBounceHorizontal = true
+        
+        super.init(frame: frame)
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        addSubview(collectionView)
         
         backgroundColor = .systemBackground
-        addSubview(imageView)
-        
         isUserInteractionEnabled = true
-        imageView.isUserInteractionEnabled = true
-        
-        let viewTapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(onTap(_:))
-        )
-        let imageTapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(onTap(_:))
-        )
-        addGestureRecognizer(viewTapGestureRecognizer)
-        imageView.addGestureRecognizer(imageTapGestureRecognizer)
     }
     
     required init?(coder: NSCoder) {
@@ -50,59 +58,88 @@ final class PhotoDetailView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let ratio: CGFloat = CGFloat(photo.height) / CGFloat(photo.width)
-        var imageWidth: CGFloat = frame.width
-        var imageHeight: CGFloat = ratio * frame.width
-        if imageHeight > frame.height {
-            let newRatio = CGFloat(photo.width) / CGFloat(photo.height)
-            imageHeight = frame.height
-            imageWidth = newRatio * frame.height
-        }
-        
-        imageView.backgroundColor = .gray
-        imageView.contentMode = .scaleAspectFit
-        imageView.setW(imageWidth, andH: imageHeight)
-        imageView.center(with: self)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            collectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: -20 / 2),
+            collectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: 20 / 2),
+        ])
     }
     
-    @objc func onTap(_ gestureRecognizer: UITapGestureRecognizer) {
-        delegate?.photoDetailOnTap()
+    func scrollToCurrentIndex() {
+        collectionView.scrollToItem(
+            at: IndexPath(item: currentIndex, section: 0),
+            at: .centeredHorizontally,
+            animated: false
+        )
     }
     
     func invalidateLayout(size: CGSize) {
         setSizeFrom(size)
-        
-        let ratio: CGFloat = CGFloat(photo.height) / CGFloat(photo.width)
-        var imageWidth: CGFloat = frame.width
-        var imageHeight: CGFloat = ratio * frame.width
-        if imageHeight > frame.height {
-            let newRatio = CGFloat(photo.width) / CGFloat(photo.height)
-            imageHeight = frame.height
-            imageWidth = newRatio * frame.height
-        }
-        
-        imageView.setW(imageWidth, andH: imageHeight)
-        imageView.center(with: self)
+        collectionView.setSizeFrom(size)
+        collectionView.center(with: self)
+        collectionView.collectionViewLayout.invalidateLayout()
+        scrollToCurrentIndex()
+    }
+}
+
+extension PhotoDetailView: UICollectionViewDataSource {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        return photos.count
     }
     
-    func showImage() {
-        let ratio: CGFloat = CGFloat(photo.height) / CGFloat(photo.width)
-        let imageSize: CGSize = CGSize(width: frame.width, height: ratio * frame.width)
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: photoDetailCellID, for: indexPath
+        ) as? PhotoDetailCollectionViewCell
+        else { return UICollectionViewCell() }
         
-        var placeholder: UIImage?
-        if let blurHash = photo.blurHash {
-            placeholder = UIImage(blurHash: blurHash, size: imageSize)
-        }
+        cell.delegate = self
+        cell.set(photo: photos[indexPath.row])
         
-        imageView.sd_setImage(
-            with: URL(string: photo.urls.full),
-            placeholderImage: placeholder,
-            progress: { receivedSize, expectedSize, _ in
-                print(receivedSize, expectedSize)
-            },
-            completed: { image, error, cacheType, imageURL in
-                print(cacheType.rawValue)
-            }
+        return cell
+    }
+}
+
+extension PhotoDetailView: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        return CGSize(
+            width: collectionView.bounds.width - 20,
+            height: collectionView.bounds.height
         )
+    }
+}
+
+extension PhotoDetailView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        currentIndex = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+    }
+}
+
+extension PhotoDetailView: PhotoDetailCollectionViewCellDelegate {
+    func photoViewCellDidTap(_ cell: PhotoDetailCollectionViewCell) {
+        delegate?.photoDetailOnTap()
+    }
+    
+    func photoViewCellDidSwipePop() {
+        delegate?.photoDetailDismissed()
     }
 }

@@ -8,33 +8,29 @@
 import Foundation
 import UIKit
 
-protocol Snapshotable {
-    func getSnapshot() -> UIView 
-}
-
-class CustomTransition: NSObject,
-                        UIViewControllerAnimatedTransitioning {
+final class CustomTransition: NSObject,
+                              UIViewControllerAnimatedTransitioning {
     
-    private let animatedInitialView: UIView
-    private let photo: Photo
+    private let sourceImage: UIImage
+    private let sourceFrame: CGRect
+    private let sourcePhoto: Photo
     
-    init(initialView: UIView, photo: Photo) {
-        self.animatedInitialView = initialView
-        self.photo = photo
+    init(sourceImage: UIImage, sourceFrame: CGRect, sourcePhoto: Photo) {
+        self.sourceImage = sourceImage
+        self.sourceFrame = sourceFrame
+        self.sourcePhoto = sourcePhoto
     }
     
     func transitionDuration(
         using transitionContext: UIViewControllerContextTransitioning?
     ) -> TimeInterval {
-        return 0.2
+        return 0.3
     }
     
     func animateTransition(
         using transitionContext: UIViewControllerContextTransitioning
     ) {
-        guard let fromView = transitionContext.viewController(forKey: .from)?.view,
-              let toView = transitionContext.viewController(forKey: .to)?.view,
-              let snapshotView = (animatedInitialView as? Snapshotable)?.getSnapshot()
+        guard let toView = transitionContext.viewController(forKey: .to)?.view
         else {
             transitionContext.completeTransition(true)
             return
@@ -42,17 +38,24 @@ class CustomTransition: NSObject,
         
         let containerView = transitionContext.containerView
         
-        containerView.addSubview(fromView)
+        let snapshotView: UIImageView = UIImageView(image: sourceImage)
+        let isLandscape = sourcePhoto.width > sourcePhoto.height
+        let ratio: CGFloat = isLandscape ? CGFloat(sourcePhoto.width) / CGFloat(sourcePhoto.height) : CGFloat(sourcePhoto.height) / CGFloat(sourcePhoto.width)
+        let snapshotWidth: CGFloat = isLandscape ? (sourceFrame.width * ratio) : sourceFrame.width
+        let snapshotHeigth: CGFloat = isLandscape ? sourceFrame.height : (sourceFrame.height * ratio)
+        snapshotView.setXAndYFrom(sourceFrame.origin)
+        snapshotView.setW(snapshotWidth, andH: snapshotHeigth)
+        
         containerView.addSubview(toView)
         containerView.addSubview(snapshotView)
         
         toView.alpha = 0
         
-        let leftUpperPoint = animatedInitialView.convert(CGPoint.zero, to: nil)
+        let leftUpperPoint = snapshotView.convert(CGPoint.zero, to: nil)
         snapshotView.setXAndYFrom(leftUpperPoint)
         
         func calculateToViewSize() -> CGSize {
-            let ratio: CGFloat = CGFloat(photo.height) / CGFloat(photo.width)
+            let ratio: CGFloat = CGFloat(sourcePhoto.height) / CGFloat(sourcePhoto.width)
             let width: CGFloat = toView.width
             let height: CGFloat = width * ratio
             return CGSize(width: toView.width, height: height)
@@ -73,7 +76,6 @@ class CustomTransition: NSObject,
                 guard isFinished else { return }
                 
                 snapshotView.removeFromSuperview()
-                fromView.transform = .identity
                 transitionContext.completeTransition(true)
             }
         )
