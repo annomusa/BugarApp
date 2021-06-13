@@ -39,6 +39,7 @@ final class PhotoDetailView: NiblessView {
         collectionView.allowsMultipleSelection = true
         collectionView.isPagingEnabled = true
         collectionView.alwaysBounceHorizontal = true
+        collectionView.backgroundColor = .systemBackground
         
         super.init(frame: frame)
         
@@ -65,7 +66,7 @@ final class PhotoDetailView: NiblessView {
     
     func scrollToCurrentIndex() {
         collectionView.scrollToItem(
-            at: IndexPath(item: currentIndex, section: 0),
+            at: IndexPath(row: currentIndex, section: 0),
             at: .centeredHorizontally,
             animated: false
         )
@@ -75,8 +76,7 @@ final class PhotoDetailView: NiblessView {
         setSizeFrom(size)
         collectionView.setSizeFrom(size)
         collectionView.center(with: self)
-        collectionView.collectionViewLayout.invalidateLayout()
-        scrollToCurrentIndex()
+        collectionView.layoutIfNeeded()
     }
 }
 
@@ -120,11 +120,6 @@ extension PhotoDetailView: UICollectionViewDelegateFlowLayout {
 }
 
 extension PhotoDetailView: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-    }
-    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         currentIndex = Int(scrollView.contentOffset.x / scrollView.bounds.width)
     }

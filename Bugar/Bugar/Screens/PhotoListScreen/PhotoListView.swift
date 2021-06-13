@@ -50,7 +50,7 @@ final class PhotoListView: NiblessView {
     func invalidateLayout(size: CGSize) {
         self.setSizeFrom(size)
         collectionView.setSizeFrom(size)
-        collectionView.collectionViewLayout.invalidateLayout()
+        collectionView.layoutIfNeeded()
     }
     
     func render() {
