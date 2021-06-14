@@ -15,10 +15,10 @@ final class PhotoListViewController: NiblessViewController {
     private let searchService: PhotosSearcher
     
     // MARK: - Private Attributes
+    private(set) var searchPhotoResult: Result<SearchPhotosResult, Error>?
     private var photoListView: PhotoListView?
     private var emptyListView: EmptyPhotoListView?
     private let maximumPage: Int = 2
-    private var searchPhotoResult: Result<SearchPhotosResult, Error>?
     
     // MARK: - Snapshot for custom push transition
     private(set) var selectedImage: UIImage?

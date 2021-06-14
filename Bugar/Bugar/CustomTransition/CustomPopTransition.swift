@@ -51,8 +51,6 @@ final class CustomPopTransition: NSObject,
         containerView.addSubview(toView)
         toView.alpha = 0
         
-//        fromView.alpha = 1
-        
         UIView.animate(
             withDuration: transitionDuration,
             animations: {
@@ -63,7 +61,7 @@ final class CustomPopTransition: NSObject,
             },
             completion: { isFinished in
                 guard isFinished else { return }
-                print(isFinished)
+                
                 snapshotView.removeFromSuperview()
                 transitionContext.completeTransition(true)
             }

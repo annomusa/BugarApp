@@ -15,6 +15,9 @@ final class CustomPushTransition: NSObject,
     private let sourceFrame: CGRect
     private let sourcePhoto: Photo
     
+    /// Creating Custom Push Transition
+    /// - Parameters:
+    ///   - sourcePhoto: /// Handling size nomalization after the image scaled to fit the cell size
     init(sourceImage: UIImage, sourceFrame: CGRect, sourcePhoto: Photo) {
         self.sourceImage = sourceImage
         self.sourceFrame = sourceFrame

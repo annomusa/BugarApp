@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		12FD0EDD1334C724AD3F4D71 /* Pods_Bugar_BugarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D9CEA2B5D61254BD3AB324 /* Pods_Bugar_BugarUITests.framework */; };
-		3E7EA5C6860143E3DCEB828C /* Pods_BugarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7CDF89ED260990E1E42CBF /* Pods_BugarTests.framework */; };
 		B10A965526731E3F00CE900D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B10A965426731E3F00CE900D /* SDWebImage */; };
 		B10A9658267341EE00CE900D /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10A9657267341EE00CE900D /* PhotoDetailViewController.swift */; };
 		B10A965C26734D8D00CE900D /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10A965B26734D8C00CE900D /* PhotoDetailView.swift */; };
@@ -44,7 +42,6 @@
 		B1DF56342673152F0034C073 /* MockPhotoSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DF56332673152F0034C073 /* MockPhotoSearcher.swift */; };
 		B1DF56362673185D0034C073 /* PhotoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DF56352673185D0034C073 /* PhotoListView.swift */; };
 		B1DF563826731C170034C073 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DF563726731C170034C073 /* PhotoCollectionViewCell.swift */; };
-		BB99D5263A7F66EAA70685BE /* Pods_Bugar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76733DA70596A2E83C04042B /* Pods_Bugar.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,14 +62,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		029D0C8A791767632EEBF267 /* Pods-Bugar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bugar.release.xcconfig"; path = "Target Support Files/Pods-Bugar/Pods-Bugar.release.xcconfig"; sourceTree = "<group>"; };
-		1A3DDDA20C7ACF1406217B28 /* Pods-BugarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BugarTests.release.xcconfig"; path = "Target Support Files/Pods-BugarTests/Pods-BugarTests.release.xcconfig"; sourceTree = "<group>"; };
-		3A7CDF89ED260990E1E42CBF /* Pods_BugarTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BugarTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6FA6A50B1F26157AC27AFE90 /* Pods-Bugar-BugarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bugar-BugarUITests.release.xcconfig"; path = "Target Support Files/Pods-Bugar-BugarUITests/Pods-Bugar-BugarUITests.release.xcconfig"; sourceTree = "<group>"; };
-		76733DA70596A2E83C04042B /* Pods_Bugar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bugar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		80D9CEA2B5D61254BD3AB324 /* Pods_Bugar_BugarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bugar_BugarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		80E5B5906F3342A01F299870 /* Pods-Bugar-BugarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bugar-BugarUITests.debug.xcconfig"; path = "Target Support Files/Pods-Bugar-BugarUITests/Pods-Bugar-BugarUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		AEC897622090B3D3135F465A /* Pods-BugarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BugarTests.debug.xcconfig"; path = "Target Support Files/Pods-BugarTests/Pods-BugarTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B10A9657267341EE00CE900D /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 		B10A965B26734D8C00CE900D /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
 		B10A965E2673521000CE900D /* UIView+CBFrameHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+CBFrameHelpers.h"; sourceTree = "<group>"; };
@@ -114,7 +103,6 @@
 		B1DF56332673152F0034C073 /* MockPhotoSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoSearcher.swift; sourceTree = "<group>"; };
 		B1DF56352673185D0034C073 /* PhotoListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoListView.swift; sourceTree = "<group>"; };
 		B1DF563726731C170034C073 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
-		C466CC09EA2A1AE8288E4852 /* Pods-Bugar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bugar.debug.xcconfig"; path = "Target Support Files/Pods-Bugar/Pods-Bugar.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +112,6 @@
 			files = (
 				B10A9664267356C500CE900D /* BlurHash in Frameworks */,
 				B10A965526731E3F00CE900D /* SDWebImage in Frameworks */,
-				BB99D5263A7F66EAA70685BE /* Pods_Bugar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,7 +119,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E7EA5C6860143E3DCEB828C /* Pods_BugarTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,36 +126,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12FD0EDD1334C724AD3F4D71 /* Pods_Bugar_BugarUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		55D44F7D2219364794224590 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C466CC09EA2A1AE8288E4852 /* Pods-Bugar.debug.xcconfig */,
-				029D0C8A791767632EEBF267 /* Pods-Bugar.release.xcconfig */,
-				80E5B5906F3342A01F299870 /* Pods-Bugar-BugarUITests.debug.xcconfig */,
-				6FA6A50B1F26157AC27AFE90 /* Pods-Bugar-BugarUITests.release.xcconfig */,
-				AEC897622090B3D3135F465A /* Pods-BugarTests.debug.xcconfig */,
-				1A3DDDA20C7ACF1406217B28 /* Pods-BugarTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		65F52AAAE49DCBC78CDF24A6 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				76733DA70596A2E83C04042B /* Pods_Bugar.framework */,
-				80D9CEA2B5D61254BD3AB324 /* Pods_Bugar_BugarUITests.framework */,
-				3A7CDF89ED260990E1E42CBF /* Pods_BugarTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		B10A9656267341DC00CE900D /* PhotoDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,8 +163,6 @@
 				B10BE32C266A3BEE0057372B /* BugarTests */,
 				B10BE337266A3BEE0057372B /* BugarUITests */,
 				B10BE314266A3BED0057372B /* Products */,
-				55D44F7D2219364794224590 /* Pods */,
-				65F52AAAE49DCBC78CDF24A6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -362,7 +322,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B10BE33D266A3BEE0057372B /* Build configuration list for PBXNativeTarget "Bugar" */;
 			buildPhases = (
-				23E9EE35C49960B590D5FE77 /* [CP] Check Pods Manifest.lock */,
 				B10BE30F266A3BED0057372B /* Sources */,
 				B10BE310266A3BED0057372B /* Frameworks */,
 				B10BE311266A3BED0057372B /* Resources */,
@@ -384,7 +343,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B10BE340266A3BEE0057372B /* Build configuration list for PBXNativeTarget "BugarTests" */;
 			buildPhases = (
-				A5A88A81CC7DC11C22DC60F2 /* [CP] Check Pods Manifest.lock */,
 				B10BE325266A3BEE0057372B /* Sources */,
 				B10BE326266A3BEE0057372B /* Frameworks */,
 				B10BE327266A3BEE0057372B /* Resources */,
@@ -403,7 +361,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B10BE343266A3BEE0057372B /* Build configuration list for PBXNativeTarget "BugarUITests" */;
 			buildPhases = (
-				21AA0067BD0725EDCEE3589B /* [CP] Check Pods Manifest.lock */,
 				B10BE330266A3BEE0057372B /* Sources */,
 				B10BE331266A3BEE0057372B /* Frameworks */,
 				B10BE332266A3BEE0057372B /* Resources */,
@@ -490,75 +447,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		21AA0067BD0725EDCEE3589B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Bugar-BugarUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		23E9EE35C49960B590D5FE77 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Bugar-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A5A88A81CC7DC11C22DC60F2 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BugarTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B10BE30F266A3BED0057372B /* Sources */ = {
@@ -758,7 +646,6 @@
 		};
 		B10BE33E266A3BEE0057372B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C466CC09EA2A1AE8288E4852 /* Pods-Bugar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -781,7 +668,6 @@
 		};
 		B10BE33F266A3BEE0057372B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 029D0C8A791767632EEBF267 /* Pods-Bugar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -803,7 +689,6 @@
 		};
 		B10BE341266A3BEE0057372B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AEC897622090B3D3135F465A /* Pods-BugarTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -825,7 +710,6 @@
 		};
 		B10BE342266A3BEE0057372B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A3DDDA20C7ACF1406217B28 /* Pods-BugarTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -847,7 +731,6 @@
 		};
 		B10BE344266A3BEE0057372B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 80E5B5906F3342A01F299870 /* Pods-Bugar-BugarUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -867,7 +750,6 @@
 		};
 		B10BE345266A3BEE0057372B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6FA6A50B1F26157AC27AFE90 /* Pods-Bugar-BugarUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
