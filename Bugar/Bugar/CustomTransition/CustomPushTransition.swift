@@ -72,18 +72,32 @@ final class CustomPushTransition: NSObject,
     }
     
     private func getToViewPhotoSize(toView: UIView) -> CGSize {
-        let ratio: CGFloat = CGFloat(sourcePhoto.height) / CGFloat(sourcePhoto.width)
-        let width: CGFloat = toView.width
-        let height: CGFloat = width * ratio
-        return CGSize(width: toView.width, height: height)
+        var ratio: CGFloat = CGFloat(sourcePhoto.height) / CGFloat(sourcePhoto.width)
+        var width: CGFloat = toView.width
+        var height: CGFloat = width * ratio
+        
+        if height > toView.height {
+            ratio = CGFloat(sourcePhoto.width) / CGFloat(sourcePhoto.height)
+            height = toView.height
+            width = height * ratio
+        }
+        
+        return CGSize(width: width, height: height)
     }
     
     private func getSnapshotPhotoSize() -> CGSize {
         let isLandscape = sourcePhoto.width > sourcePhoto.height
-        let ratio: CGFloat = isLandscape ? CGFloat(sourcePhoto.width) / CGFloat(sourcePhoto.height) : CGFloat(sourcePhoto.height) / CGFloat(sourcePhoto.width)
-        let snapshotWidth: CGFloat = isLandscape ? (sourceFrame.width * ratio) : sourceFrame.width
-        let snapshotHeigth: CGFloat = isLandscape ? sourceFrame.height : (sourceFrame.height * ratio)
-        return .init(width: snapshotWidth, height: snapshotHeigth)
+        var ratio: CGFloat = CGFloat(sourcePhoto.height) / CGFloat(sourcePhoto.width)
+        var width: CGFloat = sourceFrame.width
+        var height: CGFloat = width * ratio
+        
+        if !isLandscape {
+            ratio = CGFloat(sourcePhoto.width) / CGFloat(sourcePhoto.height)
+            height = sourceFrame.height
+            width = height * ratio
+        }
+        
+        return CGSize(width: width, height: height)
     }
     
 }

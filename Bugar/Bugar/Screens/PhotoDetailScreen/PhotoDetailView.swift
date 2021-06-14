@@ -21,6 +21,7 @@ final class PhotoDetailView: NiblessView {
     let collectionView: UICollectionView
     private let photos: [Photo]
     private var currentIndex: Int
+    private let horizontalSpacing: CGFloat = 10
     
     weak var delegate: PhotoDetailViewDelegate?
     
@@ -30,8 +31,13 @@ final class PhotoDetailView: NiblessView {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 20
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        layout.minimumLineSpacing = horizontalSpacing
+        layout.sectionInset = UIEdgeInsets(
+            top: 0,
+            left: horizontalSpacing / 2,
+            bottom: 0,
+            right: horizontalSpacing / 2
+        )
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(PhotoDetailCollectionViewCell.self, forCellWithReuseIdentifier: photoDetailCellID)
@@ -59,8 +65,8 @@ final class PhotoDetailView: NiblessView {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            collectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: -20 / 2),
-            collectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: 20 / 2),
+            collectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: -(horizontalSpacing) / 2),
+            collectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: horizontalSpacing / 2),
         ])
     }
     
@@ -115,7 +121,7 @@ extension PhotoDetailView: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         return CGSize(
-            width: collectionView.bounds.width - 20,
+            width: collectionView.bounds.width - horizontalSpacing,
             height: collectionView.bounds.height
         )
     }
