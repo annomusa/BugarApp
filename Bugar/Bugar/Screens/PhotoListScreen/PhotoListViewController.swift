@@ -16,9 +16,11 @@ final class PhotoListViewController: NiblessViewController {
     
     // MARK: - Private Attributes
     private var photoListView: PhotoListView?
+    private var emptyListView: EmptyPhotoListView?
+    private let maximumPage: Int = 2
     private var searchPhotoResult: Result<SearchPhotosResult, Error>?
     
-    // MARK: - Snapshot for custom transition
+    // MARK: - Snapshot for custom push transition
     private(set) var selectedImage: UIImage?
     private(set) var selectedFrame: CGRect?
     private(set) var selectedPhoto: Photo?
@@ -32,13 +34,10 @@ final class PhotoListViewController: NiblessViewController {
     override func loadView() {
         super.loadView()
         
-        photoListView = PhotoListView(frame: view.frame)
-        photoListView?.photoListDelegate = self
-        
         view.backgroundColor = .systemBackground
-        view.addSubview(photoListView!)
-            
         title = "Fitness Inspiration"
+        
+        showEmptyList()
     }
     
     override func viewDidLoad() {
@@ -60,41 +59,106 @@ final class PhotoListViewController: NiblessViewController {
     }
 }
 
-private extension PhotoListViewController {
+extension PhotoListViewController {
     
     private func fetchPhotos() {
         searchService.search(
             query: "fitness",
             page: 1,
-            perPage: 20,
+            perPage: 40,
             onComplete: { [weak self] result in
                 guard let s = self else { return }
                 s.searchPhotoResult = result
                 switch result {
                 case .success(let searchResult):
                     s.onSuccessFetch(photos: searchResult.results)
-                case .failure(_):
-                    break
+                case .failure(let error):
+                    s.onErrorFetch(error: error)
                 }
             }
         )
     }
     
     private func prefetchLargeImage(photos: [Photo]) {
+        let start = DispatchTime.now()
         SDWebImagePrefetcher.shared.prefetchURLs(
             photos.compactMap { URL(string: $0.urls.regular) },
-            progress: { noOfFinishedUrls, noOfTotalUrls in
-                print(noOfFinishedUrls, noOfTotalUrls)
-            },
+            progress: nil,
             completed: { noOfFinishedUrls, noOfSkippedUrls in
-                print(noOfFinishedUrls, noOfSkippedUrls)
+                let end = DispatchTime.now()
+                let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+                let timeInterval = Double(nanoTime) / 1_000_000_000
+                print("Time: \(timeInterval) seconds")
             }
         )
     }
     
     private func onSuccessFetch(photos: [Photo]) {
-        photoListView?.append(photos: photos)
+        renderPhotos(photos: photos)
         prefetchLargeImage(photos: photos)
+    }
+    
+    private func onErrorFetch(error: Error) {
+        executeInMainThread { [weak self] in
+            self?.renderErrorView(error: error)
+        }
+    }
+    
+    private func renderErrorView(error: Error) {
+        let alertView = UIAlertController(
+            title: "Something went wrong",
+            message: error.localizedDescription,
+            preferredStyle: .alert
+        )
+        let refreshAction = UIAlertAction(
+            title: "Refresh",
+            style: .default,
+            handler: { [weak alertView] _ in
+                alertView?.dismiss(
+                    animated: true,
+                    completion: { [weak self] in
+                        self?.fetchPhotos()
+                    }
+                )
+            }
+        )
+        alertView.addAction(refreshAction)
+        present(alertView, animated: true, completion: nil)
+    }
+    
+    private func renderPhotos(photos: [Photo]) {
+        let work = { [weak self] in
+            guard let s = self else { return }
+            if let photoListView = s.photoListView {
+                photoListView.append(photos: photos)
+            } else {
+                s.photoListView = PhotoListView(frame: s.view.frame)
+                s.photoListView?.photoListDelegate = s
+                s.photoListView?.set(photos: photos)
+                s.view.addSubview(s.photoListView!)
+            }
+            s.hideEmptyList()
+        }
+        executeInMainThread {
+            work()
+        }
+    }
+    
+    private func hideEmptyList() {
+        executeInMainThread { [weak self] in
+            guard let s = self else { return }
+            s.emptyListView?.removeFromSuperview()
+            s.emptyListView = nil
+        }
+    }
+    
+    private func showEmptyList() {
+        executeInMainThread { [weak self] in
+            guard let s = self else { return }
+            s.emptyListView?.removeFromSuperview()
+            s.emptyListView = EmptyPhotoListView(frame: s.view.frame, emptyItem: 20)
+            s.view.addSubview(s.emptyListView!)
+        }
     }
 }
 

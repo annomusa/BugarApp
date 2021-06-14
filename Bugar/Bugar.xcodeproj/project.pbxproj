@@ -27,6 +27,8 @@
 		B19AE1BE2676521200CF57FB /* NiblessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19AE1BD2676521200CF57FB /* NiblessViewController.swift */; };
 		B19AE1C0267652D100CF57FB /* NiblessCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19AE1BF267652D000CF57FB /* NiblessCollectionViewCell.swift */; };
 		B19AE1C22676535400CF57FB /* NiblessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19AE1C12676535400CF57FB /* NiblessView.swift */; };
+		B19AE1C42677014B00CF57FB /* EmptyPhotoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19AE1C32677014A00CF57FB /* EmptyPhotoListView.swift */; };
+		B19AE1C62677066200CF57FB /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19AE1C52677066200CF57FB /* Thread.swift */; };
 		B1BCB88E267111DB004EA191 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BCB88D267111DB004EA191 /* ContentType.swift */; };
 		B1BCB891267117EB004EA191 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BCB890267117EB004EA191 /* NetworkError.swift */; };
 		B1BCB89326711836004EA191 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BCB89226711836004EA191 /* Request.swift */; };
@@ -95,6 +97,8 @@
 		B19AE1BD2676521200CF57FB /* NiblessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiblessViewController.swift; sourceTree = "<group>"; };
 		B19AE1BF267652D000CF57FB /* NiblessCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiblessCollectionViewCell.swift; sourceTree = "<group>"; };
 		B19AE1C12676535400CF57FB /* NiblessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiblessView.swift; sourceTree = "<group>"; };
+		B19AE1C32677014A00CF57FB /* EmptyPhotoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPhotoListView.swift; sourceTree = "<group>"; };
+		B19AE1C52677066200CF57FB /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		B1BCB88D267111DB004EA191 /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		B1BCB890267117EB004EA191 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		B1BCB89226711836004EA191 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 				B19AE1BD2676521200CF57FB /* NiblessViewController.swift */,
 				B19AE1BF267652D000CF57FB /* NiblessCollectionViewCell.swift */,
 				B19AE1C12676535400CF57FB /* NiblessView.swift */,
+				B19AE1C52677066200CF57FB /* Thread.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 				B1DF563726731C170034C073 /* PhotoCollectionViewCell.swift */,
 				B1DF56352673185D0034C073 /* PhotoListView.swift */,
 				B1DF5625267225600034C073 /* PhotoListViewController.swift */,
+				B19AE1C32677014A00CF57FB /* EmptyPhotoListView.swift */,
 			);
 			path = PhotoListScreen;
 			sourceTree = "<group>";
@@ -562,9 +568,11 @@
 				B1DF5626267225600034C073 /* PhotoListViewController.swift in Sources */,
 				B1DF563826731C170034C073 /* PhotoCollectionViewCell.swift in Sources */,
 				B1BCB88E267111DB004EA191 /* ContentType.swift in Sources */,
+				B19AE1C42677014B00CF57FB /* EmptyPhotoListView.swift in Sources */,
 				B10BE317266A3BED0057372B /* AppDelegate.swift in Sources */,
 				B1DF562A26725E6C0034C073 /* SearchPhotosService.swift in Sources */,
 				B10A9658267341EE00CE900D /* PhotoDetailViewController.swift in Sources */,
+				B19AE1C62677066200CF57FB /* Thread.swift in Sources */,
 				B19AE1B6267524D700CF57FB /* PhotoSourceAnimatable.swift in Sources */,
 				B1BCB8A226712708004EA191 /* PhotosModel.swift in Sources */,
 				B10BE319266A3BED0057372B /* SceneDelegate.swift in Sources */,

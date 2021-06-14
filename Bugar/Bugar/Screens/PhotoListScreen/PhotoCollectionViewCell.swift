@@ -18,8 +18,8 @@ final class PhotoCollectionViewCell: NiblessCollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemBackground
-        image.backgroundColor = .systemBackground
+        backgroundColor = .gray
+        image.backgroundColor = .gray
         
         contentView.addSubview(image)
         image.clipsToBounds = true

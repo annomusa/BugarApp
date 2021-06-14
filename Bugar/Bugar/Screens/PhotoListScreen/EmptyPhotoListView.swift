@@ -1,31 +1,25 @@
 //
-//  PhotoListView.swift
+//  EmptyPhotoListView.swift
 //  Bugar
 //
-//  Created by Anno Musa on 10/06/21.
+//  Created by Anno Musa on 14/06/21.
 //
 
 import Foundation
 import UIKit
 
-let photoCellID = "photoCellID"
-
-protocol PhotoListViewDelegate: AnyObject {
-    func photoListViewDidSelect(image: UIImage?, frame: CGRect, selectedIndex: Int)
-}
-
-final class PhotoListView: NiblessView {
-    
-    weak var photoListDelegate: PhotoListViewDelegate?
+final class EmptyPhotoListView: NiblessView {
     
     let collectionView: UICollectionView
+    
+    private var emptyItem: Int
     private let collectionViewLayout: UICollectionViewFlowLayout
-    private var photos: [Photo] = []
     private var itemsPerRow: CGFloat = 5
     private var paddingSpace: CGFloat = 1
     private var sectionInsets: UIEdgeInsets = .zero
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, emptyItem: Int) {
+        self.emptyItem = emptyItem
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = paddingSpace
@@ -35,15 +29,22 @@ final class PhotoListView: NiblessView {
         
         super.init(frame: frame)
         
+        addSubview(collectionView)
         backgroundColor = .systemBackground
-        collectionView.backgroundColor = .systemBackground
         
         addSubview(collectionView)
         collectionView.frame = frame
+        collectionView.backgroundColor = .systemBackground
         collectionView.alwaysBounceVertical = true
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: photoCellID)
         collectionView.delegate = self
         collectionView.dataSource = self
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        collectionView.reloadData()
     }
     
     func invalidateLayout(size: CGSize) {
@@ -51,62 +52,28 @@ final class PhotoListView: NiblessView {
         collectionView.setSizeFrom(size)
         collectionView.layoutIfNeeded()
     }
-    
-    func render() {
-        let work = {
-            self.collectionView.reloadData()
-        }
-        executeInMainThread {
-            work()
-        }
-    }
-    
-    func set(photos: [Photo]) {
-        self.photos = photos
-        render()
-    }
-    
-    func append(photos: [Photo]) {
-        self.photos.append(contentsOf: photos)
-        render()
-    }
-    
 }
 
-extension PhotoListView: UICollectionViewDelegate {
+extension EmptyPhotoListView: UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 }
 
-extension PhotoListView: UICollectionViewDataSource {
+extension EmptyPhotoListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        return emptyItem
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoCellID, for: indexPath) as? PhotoCollectionViewCell
             else { return UICollectionViewCell() }
-        cell.backgroundColor = .systemBackground
-        cell.set(photo: photos[indexPath.row])
+        
         return cell
     }
 }
 
-extension PhotoListView: UICollectionViewDelegateFlowLayout {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        didSelectItemAt indexPath: IndexPath) {
-        guard let cellView = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell else { return }
-        
-        let cellFrame = collectionView.convert(cellView.frame, to: window)
-        photoListDelegate?.photoListViewDidSelect(
-            image: cellView.image.image,
-            frame: cellFrame,
-            selectedIndex: indexPath.row
-        )
-    }
-    
+extension EmptyPhotoListView: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
