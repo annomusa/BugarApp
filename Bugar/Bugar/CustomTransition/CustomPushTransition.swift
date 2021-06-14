@@ -39,37 +39,24 @@ final class CustomPushTransition: NSObject,
             return
         }
         
-        let containerView = transitionContext.containerView
-        
         let snapshotView: UIImageView = UIImageView(image: sourceImage)
-        let isLandscape = sourcePhoto.width > sourcePhoto.height
-        let ratio: CGFloat = isLandscape ? CGFloat(sourcePhoto.width) / CGFloat(sourcePhoto.height) : CGFloat(sourcePhoto.height) / CGFloat(sourcePhoto.width)
-        let snapshotWidth: CGFloat = isLandscape ? (sourceFrame.width * ratio) : sourceFrame.width
-        let snapshotHeigth: CGFloat = isLandscape ? sourceFrame.height : (sourceFrame.height * ratio)
+        let snapshotSize: CGSize = getSnapshotPhotoSize()
         snapshotView.setXAndYFrom(sourceFrame.origin)
-        snapshotView.setW(snapshotWidth, andH: snapshotHeigth)
+        snapshotView.setW(snapshotSize.width, andH: snapshotSize.height)
         
+        let containerView = transitionContext.containerView
         containerView.addSubview(toView)
         containerView.addSubview(snapshotView)
         
         toView.alpha = 0
         
-        let leftUpperPoint = snapshotView.convert(CGPoint.zero, to: nil)
-        snapshotView.setXAndYFrom(leftUpperPoint)
-        
-        func calculateToViewSize() -> CGSize {
-            let ratio: CGFloat = CGFloat(sourcePhoto.height) / CGFloat(sourcePhoto.width)
-            let width: CGFloat = toView.width
-            let height: CGFloat = width * ratio
-            return CGSize(width: toView.width, height: height)
-        }
+        let toViewPhotoSize = getToViewPhotoSize(toView: toView)
         
         UIView.animate(
             withDuration: 0.3,
             animations: {
-                let toViewSize = calculateToViewSize()
-                let animatedViewScaleX: CGFloat = toViewSize.width / snapshotView.width
-                let animatedViewScaleY: CGFloat = toViewSize.height / snapshotView.height
+                let animatedViewScaleX: CGFloat = toViewPhotoSize.width / snapshotView.width
+                let animatedViewScaleY: CGFloat = toViewPhotoSize.height / snapshotView.height
                 snapshotView.transform = CGAffineTransform(scaleX: animatedViewScaleX, y: animatedViewScaleY)
                 snapshotView.setSizeFrom(snapshotView.frame.size)
                 snapshotView.center(with: toView)
@@ -82,6 +69,21 @@ final class CustomPushTransition: NSObject,
                 transitionContext.completeTransition(true)
             }
         )
+    }
+    
+    private func getToViewPhotoSize(toView: UIView) -> CGSize {
+        let ratio: CGFloat = CGFloat(sourcePhoto.height) / CGFloat(sourcePhoto.width)
+        let width: CGFloat = toView.width
+        let height: CGFloat = width * ratio
+        return CGSize(width: toView.width, height: height)
+    }
+    
+    private func getSnapshotPhotoSize() -> CGSize {
+        let isLandscape = sourcePhoto.width > sourcePhoto.height
+        let ratio: CGFloat = isLandscape ? CGFloat(sourcePhoto.width) / CGFloat(sourcePhoto.height) : CGFloat(sourcePhoto.height) / CGFloat(sourcePhoto.width)
+        let snapshotWidth: CGFloat = isLandscape ? (sourceFrame.width * ratio) : sourceFrame.width
+        let snapshotHeigth: CGFloat = isLandscape ? sourceFrame.height : (sourceFrame.height * ratio)
+        return .init(width: snapshotWidth, height: snapshotHeigth)
     }
     
 }

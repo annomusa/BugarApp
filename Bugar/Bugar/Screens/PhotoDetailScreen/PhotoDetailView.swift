@@ -80,6 +80,7 @@ final class PhotoDetailView: NiblessView {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension PhotoDetailView: UICollectionViewDataSource {
     
     func collectionView(
@@ -105,6 +106,7 @@ extension PhotoDetailView: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension PhotoDetailView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(
@@ -119,12 +121,14 @@ extension PhotoDetailView: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UIScrollViewDelegate
 extension PhotoDetailView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         currentIndex = Int(scrollView.contentOffset.x / scrollView.bounds.width)
     }
 }
 
+// MARK: - PhotoDetailCollectionViewCellDelegate
 extension PhotoDetailView: PhotoDetailCollectionViewCellDelegate {
     func photoViewCellDidTap(_ cell: PhotoDetailCollectionViewCell) {
         delegate?.photoDetailOnTap()

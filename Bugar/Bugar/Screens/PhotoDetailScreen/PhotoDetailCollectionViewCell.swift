@@ -13,14 +13,16 @@ protocol PhotoDetailCollectionViewCellDelegate: AnyObject {
     func photoViewCellDidSwipePop()
 }
 
-final class PhotoDetailCollectionViewCell: UICollectionViewCell {
+final class PhotoDetailCollectionViewCell: NiblessCollectionViewCell {
     
-    private var photo: Photo?
+    // MARK: - Accessible Attributes
+    let imageView = UIImageView()
+    
     weak var delegate: PhotoDetailCollectionViewCellDelegate?
     
-    let imageView = UIImageView()
+    // MARK: - Private Attributes
+    private var photo: Photo?
     private let scrollView = UIScrollView()
-    
     private var transitionIsUserDriving = false
     private var scrollViewIsZoomingFast = false
     
@@ -32,22 +34,6 @@ final class PhotoDetailCollectionViewCell: UICollectionViewCell {
         imageView.image = UIImage(systemName: "photo")
         
         setupGesture()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func set(photo: Photo) {
-        imageView.image = UIImage(systemName: "photo")
-        scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
-        imageView.sd_setImage(
-            with: URL(string: photo.urls.regular),
-            completed: { [weak self] _, _, _, _ in
-                self?.setNeedsLayout()
-                self?.layoutIfNeeded()
-            }
-        )
     }
     
     override func layoutSubviews() {
@@ -74,8 +60,21 @@ final class PhotoDetailCollectionViewCell: UICollectionViewCell {
         
         updateInsets()
     }
+    
+    func set(photo: Photo) {
+        imageView.image = UIImage(systemName: "photo")
+        scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
+        imageView.sd_setImage(
+            with: URL(string: photo.urls.regular),
+            completed: { [weak self] _, _, _, _ in
+                self?.setNeedsLayout()
+                self?.layoutIfNeeded()
+            }
+        )
+    }
 }
 
+// MARK: - UIScrollViewDelegate
 extension PhotoDetailCollectionViewCell: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard !scrollView.isZooming, !scrollView.isZoomBouncing, !scrollViewIsZoomingFast,
@@ -125,9 +124,56 @@ extension PhotoDetailCollectionViewCell: UIScrollViewDelegate {
     }
 }
 
+// MARK: - Gesture Capabilities
 extension PhotoDetailCollectionViewCell {
     
-    // MARK: - Private Methods
+    private func setupGesture() {
+        let singleTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(handleSingleTap(_:))
+        )
+        singleTapGesture.numberOfTapsRequired = 1
+        singleTapGesture.delaysTouchesBegan = true
+        
+        let doubleTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(handleDoubleTap(_:))
+        )
+        doubleTapGesture.numberOfTapsRequired = 2
+        doubleTapGesture.delaysTouchesBegan = true
+        
+        singleTapGesture.require(toFail: doubleTapGesture)
+        
+        addGestureRecognizer(singleTapGesture)
+        addGestureRecognizer(doubleTapGesture)
+    }
+    
+    @objc
+    private func handleSingleTap(_ gestureRecognizer: UIGestureRecognizer) {
+        delegate?.photoViewCellDidTap(self)
+    }
+    
+    @objc
+    private func handleDoubleTap(_ gestureRecognizer: UIGestureRecognizer) {
+        if scrollView.zoomScale != scrollView.minimumZoomScale {
+            scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
+        } else {
+            let point = gestureRecognizer.location(in: self)
+            let pointInImageView = imageView.convert(point, from: self)
+            
+            let size = CGSize(width: bounds.width / scrollView.maximumZoomScale,
+                              height: bounds.height / scrollView.maximumZoomScale)
+            
+            let origin = CGPoint(x: pointInImageView.x - size.width / 2.0,
+                                 y: pointInImageView.y - size.width / 2.0)
+            
+            scrollView.zoom(to: CGRect(origin: origin, size: size), animated: true)
+        }
+    }
+}
+
+// MARK: - Private Methods
+private extension PhotoDetailCollectionViewCell {
     
     func setupScrollView() {
         addSubview(scrollView)
@@ -175,52 +221,5 @@ extension PhotoDetailCollectionViewCell {
     
     func currentProgress() -> CGFloat {
         return currentVerticalTranslation() / scrollView.bounds.height * 2
-    }
-    
-}
-
-extension PhotoDetailCollectionViewCell {
-    
-    private func setupGesture() {
-        let singleTapGesture = UITapGestureRecognizer(
-            target: self,
-            action: #selector(handleSingleTap(_:))
-        )
-        singleTapGesture.numberOfTapsRequired = 1
-        singleTapGesture.delaysTouchesBegan = true
-        
-        let doubleTapGesture = UITapGestureRecognizer(
-            target: self,
-            action: #selector(handleDoubleTap(_:))
-        )
-        doubleTapGesture.numberOfTapsRequired = 2
-        doubleTapGesture.delaysTouchesBegan = true
-        
-        singleTapGesture.require(toFail: doubleTapGesture)
-        
-        addGestureRecognizer(singleTapGesture)
-        addGestureRecognizer(doubleTapGesture)
-    }
-    @objc
-    private func handleSingleTap(_ gestureRecognizer: UIGestureRecognizer) {
-        delegate?.photoViewCellDidTap(self)
-    }
-    
-    @objc
-    private func handleDoubleTap(_ gestureRecognizer: UIGestureRecognizer) {
-        if scrollView.zoomScale != scrollView.minimumZoomScale {
-            scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
-        } else {
-            let point = gestureRecognizer.location(in: self)
-            let pointInImageView = imageView.convert(point, from: self)
-            
-            let size = CGSize(width: bounds.width / scrollView.maximumZoomScale,
-                              height: bounds.height / scrollView.maximumZoomScale)
-            
-            let origin = CGPoint(x: pointInImageView.x - size.width / 2.0,
-                                 y: pointInImageView.y - size.width / 2.0)
-            
-            scrollView.zoom(to: CGRect(origin: origin, size: size), animated: true)
-        }
     }
 }

@@ -135,8 +135,8 @@
 		B10A9656267341DC00CE900D /* PhotoDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
-				B10A965B26734D8C00CE900D /* PhotoDetailView.swift */,
 				B10A9657267341EE00CE900D /* PhotoDetailViewController.swift */,
+				B10A965B26734D8C00CE900D /* PhotoDetailView.swift */,
 				B19AE1B72675C0E800CF57FB /* PhotoDetailCollectionViewCell.swift */,
 			);
 			path = PhotoDetailScreen;
@@ -283,10 +283,10 @@
 		B1DF5622267213300034C073 /* PhotoListScreen */ = {
 			isa = PBXGroup;
 			children = (
-				B1DF563726731C170034C073 /* PhotoCollectionViewCell.swift */,
-				B1DF56352673185D0034C073 /* PhotoListView.swift */,
 				B1DF5625267225600034C073 /* PhotoListViewController.swift */,
 				B19AE1C32677014A00CF57FB /* EmptyPhotoListView.swift */,
+				B1DF563726731C170034C073 /* PhotoCollectionViewCell.swift */,
+				B1DF56352673185D0034C073 /* PhotoListView.swift */,
 			);
 			path = PhotoListScreen;
 			sourceTree = "<group>";

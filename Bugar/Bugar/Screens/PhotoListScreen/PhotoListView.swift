@@ -16,9 +16,11 @@ protocol PhotoListViewDelegate: AnyObject {
 
 final class PhotoListView: NiblessView {
     
+    // MARK: - Accessible Attributes
+    let collectionView: UICollectionView
     weak var photoListDelegate: PhotoListViewDelegate?
     
-    let collectionView: UICollectionView
+    // MARK: - Private Attributes
     private let collectionViewLayout: UICollectionViewFlowLayout
     private var photos: [Photo] = []
     private var itemsPerRow: CGFloat = 5
@@ -61,24 +63,29 @@ final class PhotoListView: NiblessView {
         }
     }
     
+    /// Change previous photos with new one
+    /// - Parameter photos: list of new photos
     func set(photos: [Photo]) {
         self.photos = photos
         render()
     }
     
+    /// Appending list photos with new ones
+    /// - Parameter photos: list of new photos
     func append(photos: [Photo]) {
         self.photos.append(contentsOf: photos)
         render()
     }
-    
 }
 
+// MARK: - UICollectionViewDelegate
 extension PhotoListView: UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension PhotoListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
@@ -93,6 +100,7 @@ extension PhotoListView: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension PhotoListView: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,

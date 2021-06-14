@@ -58,6 +58,7 @@ final class PhotoDetailViewController: NiblessViewController {
     }
 }
 
+// MARK: - PhotoDetailViewDelegate for view actions
 extension PhotoDetailViewController: PhotoDetailViewDelegate {
     func photoDetailOnTap() {
         showImageOnly = !showImageOnly
@@ -70,6 +71,7 @@ extension PhotoDetailViewController: PhotoDetailViewDelegate {
     }
 }
 
+// MARK: - PhotoSourceAnimatable for custom transition
 extension PhotoDetailViewController: PhotoSourceAnimatable {
     var sourceImage: UIImage? {
         guard let cv = photoDetailView?.collectionView,

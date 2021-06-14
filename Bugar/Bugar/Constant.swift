@@ -28,12 +28,3 @@ struct Constants {
         static let perPage: String = "per_page"
     }
 }
-
-func calculateTime(block : (() -> Void)) {
-    let start = DispatchTime.now()
-    block()
-    let end = DispatchTime.now()
-    let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
-    let timeInterval = Double(nanoTime) / 1_000_000_000
-    print("Time: \(timeInterval) seconds")
-}
