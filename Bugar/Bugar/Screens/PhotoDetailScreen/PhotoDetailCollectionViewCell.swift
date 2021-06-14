@@ -18,8 +18,8 @@ final class PhotoDetailCollectionViewCell: UICollectionViewCell {
     private var photo: Photo?
     weak var delegate: PhotoDetailCollectionViewCellDelegate?
     
+    let imageView = UIImageView()
     private let scrollView = UIScrollView()
-    private let imageView = UIImageView()
     
     private var transitionIsUserDriving = false
     private var scrollViewIsZoomingFast = false

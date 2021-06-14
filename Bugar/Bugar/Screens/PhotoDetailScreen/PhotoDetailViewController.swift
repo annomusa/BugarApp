@@ -69,3 +69,25 @@ extension PhotoDetailViewController: PhotoDetailViewDelegate {
         navigationController?.popViewController(animated: true)
     }
 }
+
+extension PhotoDetailViewController: PhotoSourceAnimatable {
+    var sourceImage: UIImage? {
+        guard let cv = photoDetailView?.collectionView,
+              let currentCell = cv.visibleCells.first as? PhotoDetailCollectionViewCell
+        else { return nil }
+        return currentCell.imageView.image
+    }
+    
+    var sourceFrame: CGRect? {
+        guard let cv = photoDetailView?.collectionView,
+              let currentCell = cv.visibleCells.first as? PhotoDetailCollectionViewCell
+        else { return nil }
+        
+        let res = currentCell.convert(currentCell.imageView.frame, to: cv)
+        return res
+    }
+    
+    var sourcePhoto: Photo? {
+        nil
+    }
+}

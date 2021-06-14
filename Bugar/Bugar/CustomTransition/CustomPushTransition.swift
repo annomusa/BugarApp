@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-final class CustomTransition: NSObject,
-                              UIViewControllerAnimatedTransitioning {
+final class CustomPushTransition: NSObject,
+                                  UIViewControllerAnimatedTransitioning {
     
     private let sourceImage: UIImage
     private let sourceFrame: CGRect
@@ -62,7 +62,7 @@ final class CustomTransition: NSObject,
         }
         
         UIView.animate(
-            withDuration: 0.2,
+            withDuration: 0.3,
             animations: {
                 let toViewSize = calculateToViewSize()
                 let animatedViewScaleX: CGFloat = toViewSize.width / snapshotView.width

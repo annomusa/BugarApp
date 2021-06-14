@@ -46,13 +46,14 @@ extension SceneDelegate: UINavigationControllerDelegate {
            let sourceFrame = sourceAnimatable.sourceFrame,
            let sourcePhoto = sourceAnimatable.sourcePhoto {
             
-            return CustomTransition(sourceImage: sourceImage, sourceFrame: sourceFrame, sourcePhoto: sourcePhoto)
+            return CustomPushTransition(sourceImage: sourceImage, sourceFrame: sourceFrame, sourcePhoto: sourcePhoto)
             
         } else if operation == .pop,
                   let sourceAnimatable = fromVC as? PhotoSourceAnimatable,
-                  let _ = sourceAnimatable.sourceImage {
+                  let sourceFrame = sourceAnimatable.sourceFrame,
+                  let sourceImage = sourceAnimatable.sourceImage {
             
-            return nil
+            return CustomPopTransition(sourceImage: sourceImage, sourceFrame: sourceFrame)
             
         }
         

@@ -18,9 +18,9 @@ protocol PhotoDetailViewDelegate: AnyObject {
 
 final class PhotoDetailView: NiblessView {
     
+    let collectionView: UICollectionView
     private let photos: [Photo]
     private var currentIndex: Int
-    private let collectionView: UICollectionView
     
     weak var delegate: PhotoDetailViewDelegate?
     
